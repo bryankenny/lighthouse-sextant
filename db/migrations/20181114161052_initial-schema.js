@@ -14,9 +14,9 @@ exports.up = function(knex, Promise) {
       })
       .createTable("days_topics", (t) => {
         t.increments("id");
-        t.foreign("day_id").references("days.id");
-        t.foreign("topic_id").references("topics.id");
-        t.unique(["day", "topic"]);
+        t.integer("day_id").references("days.id").notNullable();
+        t.integer("topic_id").references("topics.id").notNullable();
+        t.unique(["day_id", "topic_id"]);
       })
       .createTable("resources", (t) => {
         t.increments("id");
@@ -24,23 +24,23 @@ exports.up = function(knex, Promise) {
         t.string("url").unique().notNullable();
         t.string("description").notNullable();
         t.timestamp("created_at").defaultTo(knex.fn.now());
-        t.foreign("user_id").references("users.id");
-        t.foreign("topic_id").references("topics.id");
+        t.integer("user_id").references("users.id").notNullable();
+        t.integer("topic_id").references("topics.id").notNullable();
       })
       .createTable("comments", (t) => {
         t.increments("id");
         t.string("text");
         t.timestamp("created_at").defaultTo(knex.fn.now());
-        t.foreign("user_id").references("users.id");
-        t.foreign("resource_id").references("resources.id");
+        t.integer("user_id").references("users.id").notNullable();
+        t.integer("resource_id").references("resources.id").notNullable();
 
       })
       .createTable("reactions", (t) => {
         t.increments("id");
         t.boolean("liked");
         t.integer("rating");
-        t.foreign("user_id").references("users.id");
-        t.foreign("resource_id").references("resources.id");
+        t.integer("user_id").references("users.id").notNullable();
+        t.integer("resource_id").references("resources.id").notNullable();
         t.unique(["user_id", "resource_id"]);
       })
   ]);
