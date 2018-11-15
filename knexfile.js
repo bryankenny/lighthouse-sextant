@@ -1,3 +1,4 @@
+// Keep Heroku from trying to load the nonexistent .env
 if (process.env.NODE_ENV !== "production") require('dotenv').config();
 
 module.exports = {
