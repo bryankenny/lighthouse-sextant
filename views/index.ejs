@@ -1,161 +1,517 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Resouce Index</title>
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/index.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-
-  </head>
-
-  <div id="navbar">
-    <form align="right" name="form1" method="post" action="/logout">
-    <label>
-    <input name="submit2" type="submit" id="submit2" value="log out">
-    </label>
-  </form>
-  <center class="navcenter">
-  <table border="0" cellpadding="15">
-  <tr>
-  <td>Welcome, <strong> firstName</strong>
-  <br>Your username is: userName
-  <br><a href="{{MyProfileLink}}">Edit Profile</a></td>
-  <div align="left"><form action="/resources">
-    Search Resources Here:<br>
-    <input placeholder="searchbutton" type="submit" placeholder="searchbutton" name="searchbutton" >
-    <br></div>
-   </tr>
-   </table>
-  </center></div>
-  <body>
-    <h1>Hello World!</h1>
-    <nav class="side-nav col-xl-3 col-lg-3 col-md-12 order-2 order-lg-1 py-5 bg-light">
-      <h1 class="day-heading">
-        <span style="font-family:'Franklin Gothic Medium'">Look For Resources By Day</span
-          ><small></small>
-      </h1>
-      <ul align="right" class="reference-list">
-          <p> <a href="">This will be a reference link</a></p>
-            <!-- <textarea name="" id="" cols="20" rows="10"></textarea></li> -->
-          <p> <a href="">This will be a reference link </a></p></li>
-          <p> <a href="">This will be a reference link</a></p></li>
-        </ul>
-      <div class="table">
-        <ul class='table-row'>
-          <li class="week-number">W1</li>
-          <li><a href= "">1</li></a>
-          <li><a href= "">2</li></a>
-          <li><a href= "">3</li></a>
-          <li><a href= "">4</li></a>
-          <li><a href= "">5</li></a>
-          <li><a href= "">we</li></a>
-        </ul>
-      </div>
-      <div class="table">
-          <ul class='table-row'>
-            <li class="week-number">W2</li>
-            <li><a href= "">1</li></a>
-            <li><a href= "">2</li></a>
-            <li><a href= "">3</li></a>
-            <li><a href= "">4</li></a>
-            <li><a href= "">5</li></a>
-            <li><a href= "">we</li></a>
-          </ul>
-        </div>
-        <div class="table">
-            <ul class='table-row'>
-              <li class="week-number">W3</li>
-              <li><a href= "">1</li></a>
-              <li><a href= "">2</li></a>
-              <li><a href= "">3</li></a>
-              <li><a href= "">4</li></a>
-              <li><a href= "">5</li></a>
-              <li><a href= "">we</li></a>
-            </ul>
-        </div>
-        <div class="table">
-              <ul class='table-row'>
-                <li class="week-number">W4</li>
-                <li><a href= "">1</li></a>
-                <li><a href= "">2</li></a>
-                <li><a href= "">3</li></a>
-                <li><a href= "">4</li></a>
-                <li><a href= "">5</li></a>
-                <li><a href= "">we</li></a>
-              </ul>
-        </div>
-        <div class="table">
-          <ul class='table-row'>
-            <li class="week-number">W5</li>
-            <li><a href= "">1</li></a>
-            <li><a href= "">2</li></a>
-            <li><a href= "">3</li></a>
-            <li><a href= "">4</li></a>
-            <li><a href= "">5</li></a>
-            <li><a href= "">we</li></a>
-          </ul>
-         </div>
-         <div class="table">
-          <ul class='table-row'>
-            <li class="week-number">W6</li>
-            <li><a href= "">1</li></a>
-            <li><a href= "">2</li></a>
-            <li><a href= "">3</li></a>
-            <li><a href= "">4</li></a>
-            <li><a href= "">5</li></a>
-            <li><a href= "">we</li></a>
-          </ul>
-          </div>
-          <div class="table">
-            <ul class='table-row'>
-              <li class="week-number">W7</li>
-              <li><a href= "">1</li></a>
-              <li><a href= "">2</li></a>
-              <li><a href= "">3</li></a>
-              <li><a href= "">4</li></a>
-              <li><a href= "">5</li></a>
-              <li><a href= "">we</li></a>
-            </ul>
+<html>
+    <head>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Sextant</title>
+        <link rel="stylesheet" media="all" href="application-440980db30a4b03c1caeaea1922d755ed52e15daf7b5e9e91970eb97012b014c.css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="compass_favicon-ee442e8b11982711424e19567244af062d10f1044924992a660205bc5147c060.ico"/>
+        <link rel="stylesheet" href="/styles/table.css"
+    </head>
+    <body class="days-show">
+        <header class="p-4">
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" data-turbolinks-permanent="true" role="navigation">
+                <a title="Home" class="navbar-brand" href="/days/today">
+                    <i class="fa fa-fw fa-lg fa-compass"></i>
+                </a>
+                <button aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarCollapse" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <div aria-labelledby="nav-program-dropdown" class="dropdown-menu">
+                                <!-- <a class="dropdown-item" title="Schedule" href="/days/today"> -->
+                                    <i class="fa fa-fw fa-calendar"></i>
+                                    Schedule
+                                </a>
+                                <a class="dropdown-item" title="Lectures" href="/lectures">
+                                    <i class="fa fa-fw fa-tv"></i>
+                                    Lectures
+                                </a>
+                                <a class="dropdown-item" title="Projects" href="/projects">
+                                    <i class="fa fa-fw fa-pencil-square-o"></i>
+                                    Projects
+                                </a>
+                                <a class="dropdown-item" title="Tech Interviews" href="/tech_interview_templates">
+                                    <i class="fa fa-fw fa-comments"></i>
+                                    Interviews
+                                </a>
+                                <a class="dropdown-item" title="Prep Work" href="/prep">
+                                    <i class="fa fa-fw fa-paper-plane-o"></i>
+                                    Prep Work
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a title="Incomplete Activities" class="nav-link" href="/myResources">
+                                <i class="fa fa-fw fa-exclamation-triangle"></i>
+                                <span class="non-tablet-label">My Resources</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a title="Feedback" class="nav-link" href="/feedbacks">
+                                <i class="fa fa-fw fa-comment"></i>
+                                <span class="non-tablet-label" id="feedback-link">Feedback (3)</span>
+                            </a>
+                        </li>
+                        <li class="dropdown nav-item current-user">
+                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+                                <i class="fa fa-fw fa-cogs"></i>
+                                <span class="non-tablet-label">Adam</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="/profile/edit">Edit Profile</a>
+                                <a class="dropdown-item" href="/students">Classmates</a>
+                                <a class="dropdown-item" href="/teachers?location_id=6">Teachers</a>
+                                <a class="sign-out-link dropdown-item" rel="nofollow" data-method="delete" href="/session">Sign Out</a>
+                            </div>
+                        </li>
+                        <li id="assistance-request-module">
+                            <span class="d-none" id="cancel-assistance-request">
+                                <a class="navbar-btn btn btn-outline-warning cancel-request-assistance-button" data-toggle="tooltip" data-placement="bottom" title="Cancel this Assistance Request" method="post" action="/logout">Waiting for Assistance</a>
+                            </span>
+                            <form align="center" name="form1" method="post" action="/logout">
+                              <label>
+                              <input name="submit2" type="submit" id="submit2" value="log out">
+                              </label>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main class="container-fluid" role="main">
+            <div class="row">
+                <nav class="side-nav col-xl-3 col-lg-3 col-md-12 order-2 order-lg-1 py-5 bg-light">
+                    <h1 class="day-heading">
+                        <span>W04D3</span>
+                        <small></small>
+                    </h1>
+                    <h5>
+                        <small class="text-muted">Wed Nov 14</small>
+                    </h5>
+                    <hr/>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W01</td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w01d1">1</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w01d2">2</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w01d3">3</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w01d4">4</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w01d5">5</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w01e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W02</td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w02d1">1</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w02d2">2</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w02d3">3</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w02d4">4</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w02d5">5</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w02e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W03</td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w03d1">1</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w03d2">2</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w03d3">3</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w03d4">4</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w03d5">5</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w03e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W04</td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w04d1">1</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w04d2">2</a>
+                                </td>
+                                <td class="day table-success table-primary unlocked">
+                                    <a class="" href="/days/w04d3">3</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w04d4">4</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w04d5">5</a>
+                                </td>
+                                <td class="day unlocked">
+                                    <a class="" href="/days/w04e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W05</td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w05d1">1</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w05d2">2</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w05d3">3</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w05d4">4</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w05d5">5</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w05e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W06</td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w06d1">1</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w06d2">2</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w06d3">3</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w06d4">4</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w06d5">5</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w06e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W07</td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w07d1">1</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w07d2">2</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w07d3">3</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w07d4">4</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w07d5">5</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w07e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W08</td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w08d1">1</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w08d2">2</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w08d3">3</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w08d4">4</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w08d5">5</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w08e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W09</td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w09d1">1</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w09d2">2</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w09d3">3</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w09d4">4</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w09d5">5</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w09e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="side-schedule table table-bordered table-sm table-rounded">
+                        <tbody>
+                            <tr>
+                                <td class="week">W10</td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w10d1">1</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w10d2">2</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w10d3">3</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w10d4">4</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w10d5">5</a>
+                                </td>
+                                <td class="day locked">
+                                    <a class="disabled" href="/days/w10e">we</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="day-nav-links">
+                        <a class="btn btn-outline-secondary btn-yesterday" href="/days/yesterday">Yesterday</a>
+                        &nbsp;<a class="btn btn-outline-primary btn-today" href="/days/today">Today</a>
+                    </div>
+                </nav>
+                <div class="main-content content col-xl-9 col-lg-9 col-md-12 order-1 order-lg-2 py-5 px-4">
+                    <div class="teacher-holder d-none d-lg-block" data-turbolinks-permanent="true">
+                        <h4>Teachers on duty</h4>
+                        <a href="/teachers/24">
+                            <img id="teacher_24" title="Rohit Dhand" data-toggle="tooltip" data-placement="bottom" src="https://s3.amazonaws.com/lighthouse-compass2/uploads/avatar/custom_avatar/24/thumb_Rohit.jpg" alt="Thumb rohit"/>
+                        </a>
+                        <a href="/teachers/2194">
+                            <img id="teacher_2194" title="Catherine Li" data-toggle="tooltip" data-placement="bottom" src="https://avatars3.githubusercontent.com/u/8974217?v=4" alt="8974217?v=4"/>
+                        </a>
+                    </div>
+                    <div class="reconnect-holder card">
+                        <p>You have been disconnected.</p>
+                        <a class="btn btn-success reconnect">Reload</a>
+                        <a class="btn btn-secondary dismiss">Dismiss</a>
+                    </div>
+                    <div class="schedule-heading clearfix">
+                        <h1 class="pull-left">Schedule</h1>
+                    </div>
+                    <div class="pinnednote   activity">
+                        <div class="icon icon-type" title="PinnedNote">
+                            <i class="fa fa-sticky-note"></i>
+                        </div>
+                        <div class="time time-duration">
+                            <br/>
+                            Note<br/>
+                        </div>
+                        <div class="name">LHL Resource Wall</div>
+                    </div>
+                    <div class="pinned-content">
+                        <div class="instructions">
+                            <p>Immediately following morning class, you will start on your midterm project. As such, the morning class will help you get started by giving you some important rules and tips.</p>
+                            <p>After class, follow the tasks from today which help you setup your project.</p>
+                            <p>Heads up that at the end of your midterm projects, you will be asked to evaluate yourself, your group members, and your overall experience of your midterm. </p>
+                            <p>You will be rating yourself and your group on things like your organization and communication as a team, as well as the strengths and areas for improvement of individual members. You will also spend some time reflecting on the experience as a whole. All of this information is gathered in a Google form that should take no more than 10 minutes. It will be a great opportunity to explore and reflect on what it is like to work on a team!</p>
+                        </div>
+                    </div>
+                    <div class="pinnednote   activity">
+                        <div class="icon icon-type" title="PinnedNote">
+                            <i class="fa fa-sticky-note"></i>
+                        </div>
+                        <div class="time time-duration">
+                            <br/>
+                            Note<br/>
+                        </div>
+                        <div class="name">Midterm Demos &amp;Reminder about Upcoming Week 5</div>
+                    </div>
+                    <div class="pinned-content">
+                        <div class="instructions">
+                            <p>
+                                The rest of this week and the weekend will be spent working on your midterm projects. On Monday, you &#39;ll be arriving shortly before 11AM in order to kick off demos at <strong>11AM sharp</strong>
+                                . You will be presenting to LHL staff and a new cohort! Monday is also the day you &#39;ll kick-off Career Services with a workshop in the afternoon from 1-4PM.
+                            </p>
+                            <p>You will recall that Week 5 is a Computer Science week with 30 hours of self-directed material that is done via the comfort of your own home. This format will allow you to work through material on your own or in small groups in order to increase your self-reliance and self-confidence!</p>
+                            <p>You &#39;ll be reading a bit more about the structure and expectations for next week in Compass on W5D1. For now, just make sure this upcoming shift in working style is on your radar!</p>
+                        </div>
+                    </div>
+                    <h3></h3>
+                    <a class="project-bio mb-4" href="/projects/w4-midterm-proj?day_number=w04d3">
+                        <div class="info">
+                            <div class="icon icon-type" title="Project">
+                                <i class="fa fa-gavel"></i>
+                            </div>
+                            <div class="time time-duration">
+                                w04d3<br/>
+                                &#x2192;<br/>w04e
+                            </div>
+                            <div class="name">Midterm Group P &nbsp;</div>
+                            <div class="status">
+                                <span class="badge badge-warning">Not Submitted</span>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <div class="blurb clearfix">
+                                <img style="float:left; max-width: 200px; margin-right: 10px" src="http://d.pr/i/Tuub/2S4dXCnr+" alt="2s4dxcnr+"/>
+                                <p>Your first group project! You and your team will have five days (including a weekend) to build a full stack web app for a client of your choice. The client will provide the requirements and you will decide how the experience will look and feel. Teams will be anywhere from two to three people and set by us, and there are seven clients for you to choose from.
+</p>
+                            </div>
+                        </div>
+                    </a>
+                    <h3>Lectures &Breakouts</h3>
+                    <a class="lectureplan   activity" href="/days/w04d3/activities/352">
+                        <div class="icon icon-type" title="LecturePlan">
+                            <i class="fa fa-group"></i>
+                        </div>
+                        <div class="time">
+                            10:00<br/>
+                            to<br/>12:00
+                        </div>
+                        <div class="name">Project Kickoff &nbsp;</div>
+                    </a>
+                    <h3>Work Activities</h3>
+                    <a class="task   activity" href="/days/w04d3/activities/353">
+                        <div class="icon icon-type" title="Task">
+                            <i class="fa fa-flash"></i>
+                        </div>
+                        <div class="time time-duration">
+                            <br>
+                            15m<br>
+                        </div>
+                        <div class="icon icon-completion">
+                            <i class="fa fa-square-o"></i>
+                        </div>
+                        <div class="name">Setup Local PG Database &nbsp;</div>
+                    </a>
+                    <a class="task   activity" href="/days/w04d3/activities/354">
+                        <div class="icon icon-type" title="Task">
+                            <i class="fa fa-flash"></i>
+                        </div>
+                        <div class="time time-duration">
+                            <br>
+                            30m<br>
+                        </div>
+                        <div class="icon icon-completion">
+                            <i class="fa fa-check-square-o"></i>
+                        </div>
+                        <div class="name">Setup Git Repo &nbsp;</div>
+                    </a>
+                    <div class="row mt-5">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Daily Feedback</h2>
+                                    <form class="" id="new_day_feedback" action="/days/w04d3/feedbacks" accept-charset="UTF-8" method="post">
+                                        <input name="utf8" type="hidden" value="&#x2713;"/>
+                                        <input type="hidden" name="authenticity_token" value="jd0C/ScXmmT5AHXIaVot68PWsqlWuckcziOwx02s8aUwnurqcbUlt95wovQlprEGPKVEnCDKRaHzFjR1SpyQZg=="/>
+                                        <fieldset>
+                                            <p>
+                                                <small>Use this form to provide your overall sentiment about TODAY. Neither curriculum-specific nor teacher-specific feedback should be placed here. Think instead about how today went as a whole in terms of the experience (the mood, the energy, the space, mentor support and availability, the space itself, etc).</small>
+                                            </p>
+                                            <only></only>
+                                            <div class="form-group">
+                                                <label class="face" for="day_feedback_mood_happy">
+                                                    <input type="radio" value="happy" name="day_feedback[mood]" id="day_feedback_mood_happy"/>
+                                                    <i class="fa fa-smile-o fa-5x"></i>
+                                                </label>
+                                                <label class="face" for="day_feedback_mood_ok">
+                                                    <input type="radio" value="ok" name="day_feedback[mood]" id="day_feedback_mood_ok"/>
+                                                    <i class="fa fa-circle-thin fa-5x"></i>
+                                                </label>
+                                                <label class="face" for="day_feedback_mood_sad">
+                                                    <input type="radio" value="sad" name="day_feedback[mood]" id="day_feedback_mood_sad"/>
+                                                    <i class="fa fa-frown-o fa-5x"></i>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+                                                <input placeholder="Title (optional)" class="form-control" type="text" name="day_feedback[title]" id="day_feedback_title"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea placeholder="Details about your sentiment here (required)" class="form-control" name="day_feedback[text]" id="day_feedback_text" cols="24" rows="6"></textarea>
+                                            </div>
+                                            <div align="left">
+                                                <div class="actions">
+                                                    <input type="submit" name="commit" value="Submit Feedback" class="btn btn-danger btn-lg" data-disable-with="Submit Feedback"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="table">
-              <ul class='table-row'>
-                <li class="week-number">W8</li>
-                <li><a href= "">1</li></a>
-                <li><a href= "">2</li></a>
-                <li><a href= "">3</li></a>
-                <li><a href= "">4</li></a>
-                <li><a href= "">5</li></a>
-                <li><a href= "">we</li></a>
-              </ul>
-              </div>
-              <div class="table">
-                <ul class='table-row'>
-                  <li class="week-number">W9</li>
-                  <li><a href= "">1</li></a>
-                  <li><a href= "">2</li></a>
-                  <li><a href= "">3</li></a>
-                  <li><a href= "">4</li></a>
-                  <li><a href= "">5</li></a>
-                  <li><a href= "">we</li></a>
-                </ul>
-              </div>
-              <div class="table">
-                <ul class='table-row'>
-                  <li class="week-number">W10</li>
-                  <li><a href= "">1</li></a>
-                  <li><a href= "">2</li></a>
-                  <li><a href= "">3</li></a>
-                  <li><a href= "">4</li></a>
-                  <li><a href= "">5</li></a>
-                  <li><a href= "">we</li></a>
-                </ul>
-              </div>
-
-        </body>
-
+        </main>
+        <footer></footer>
+    </body>
 </html>
