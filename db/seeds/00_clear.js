@@ -7,6 +7,7 @@ exports.seed = function(knex, Promise) {
   return Promise.all([
     knex.raw(`DELETE FROM reactions; ALTER SEQUENCE reactions_id_seq RESTART WITH 1;`),
     knex.raw(`DELETE FROM comments; ALTER SEQUENCE comments_id_seq RESTART WITH 1;`),
+    knex.raw(`DELETE FROM resources_topics; ALTER SEQUENCE resources_topics_id_seq RESTART WITH 1;`),
     knex.raw(`DELETE FROM resources; ALTER SEQUENCE resources_id_seq RESTART WITH 1;`),
     knex.raw(`DELETE FROM days_topics; ALTER SEQUENCE days_topics_id_seq RESTART WITH 1;`),
     knex.raw(`DELETE FROM topics; ALTER SEQUENCE topics_id_seq RESTART WITH 1;`),
