@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Resouce Index</title>
-
+    
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -12,15 +12,19 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
   
   </head>
+
   <div id="navbar">
   <p align="right"> Username | <a href="{{SignOutLink}}">Sign Out</a></p>
-  <center>
+  <center class="navcenter">
   <table border="0" cellpadding="15">
   <tr>
   <td>Welcome, <strong> firstName</strong>
   <br>Your username is: userName
   <br><a href="{{MyProfileLink}}">Edit Profile</a></td>
-  <br><textarea class="search" placeholder="implement search here"></textarea> 
+  <div align="left"><form action="/resources">
+    Search Resources Here:<br>
+    <input placeholder="searchbutton" type="submit" placeholder="searchbutton" name="searchbutton" >
+    <br></div>
    </tr>
    </table>
   </center></div>
@@ -28,123 +32,124 @@
     <h1>Hello World!</h1>
     <nav class="side-nav col-xl-3 col-lg-3 col-md-12 order-2 order-lg-1 py-5 bg-light">
       <h1 class="day-heading">
-        <span>Look For Resources By Day</span
+        <span style="font-family:'Franklin Gothic Medium'">Look For Resources By Day</span
           ><small></small>
       </h1>
       <ul align="right" class="reference-list">
-          <p> <a href="">This will be a reference link</a></p></li>
+          <p> <a href="">This will be a reference link</a></p>
+            <!-- <textarea name="" id="" cols="20" rows="10"></textarea></li> -->
           <p> <a href="">This will be a reference link </a></p></li>
           <p> <a href="">This will be a reference link</a></p></li>
         </ul>
       <div class="table">
         <ul class='table-row'>
           <li class="week-number">W1</li>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>we</li>
+          <li><a href= "">1</li></a>
+          <li><a href= "">2</li></a>
+          <li><a href= "">3</li></a>
+          <li><a href= "">4</li></a>
+          <li><a href= "">5</li></a>
+          <li><a href= "">we</li></a>
         </ul>
       </div>
       <div class="table">
           <ul class='table-row'>
             <li class="week-number">W2</li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>we</li>
+            <li><a href= "">1</li></a>
+            <li><a href= "">2</li></a>
+            <li><a href= "">3</li></a>
+            <li><a href= "">4</li></a>
+            <li><a href= "">5</li></a>
+            <li><a href= "">we</li></a>
           </ul>
         </div>
         <div class="table">
             <ul class='table-row'>
               <li class="week-number">W3</li>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>we</li>
+              <li><a href= "">1</li></a>
+              <li><a href= "">2</li></a>
+              <li><a href= "">3</li></a>
+              <li><a href= "">4</li></a>
+              <li><a href= "">5</li></a>
+              <li><a href= "">we</li></a>
             </ul>
         </div>
         <div class="table">
               <ul class='table-row'>
                 <li class="week-number">W4</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>we</li>
+                <li><a href= "">1</li></a>
+                <li><a href= "">2</li></a>
+                <li><a href= "">3</li></a>
+                <li><a href= "">4</li></a>
+                <li><a href= "">5</li></a>
+                <li><a href= "">we</li></a>
               </ul>
         </div>
         <div class="table">
-                <ul class='table-row'>
-                  <li class="week-number">W5</li>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>we</li>
-                </ul>
+          <ul class='table-row'>
+            <li class="week-number">W5</li>
+            <li><a href= "">1</li></a>
+            <li><a href= "">2</li></a>
+            <li><a href= "">3</li></a>
+            <li><a href= "">4</li></a>
+            <li><a href= "">5</li></a>
+            <li><a href= "">we</li></a>
+          </ul>
          </div>
          <div class="table">
-            <ul class='table-row'>
-              <li class="week-number">W6</li>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-              <li>we</li>
-            </ul>
+          <ul class='table-row'>
+            <li class="week-number">W6</li>
+            <li><a href= "">1</li></a>
+            <li><a href= "">2</li></a>
+            <li><a href= "">3</li></a>
+            <li><a href= "">4</li></a>
+            <li><a href= "">5</li></a>
+            <li><a href= "">we</li></a>
+          </ul>
           </div>
           <div class="table">
-              <ul class='table-row'>
-                <li class="week-number">W7</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>we</li>
-              </ul>
+            <ul class='table-row'>
+              <li class="week-number">W7</li>
+              <li><a href= "">1</li></a>
+              <li><a href= "">2</li></a>
+              <li><a href= "">3</li></a>
+              <li><a href= "">4</li></a>
+              <li><a href= "">5</li></a>
+              <li><a href= "">we</li></a>
+            </ul>
             </div>
             <div class="table">
+              <ul class='table-row'>
+                <li class="week-number">W8</li>
+                <li><a href= "">1</li></a>
+                <li><a href= "">2</li></a>
+                <li><a href= "">3</li></a>
+                <li><a href= "">4</li></a>
+                <li><a href= "">5</li></a>
+                <li><a href= "">we</li></a>
+              </ul>
+              </div>
+              <div class="table">
                 <ul class='table-row'>
-                  <li class="week-number">W8</li>
-                  <li>1</li>
-                  <li>2</li>
-                  <li>3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>we</li>
+                  <li class="week-number">W9</li>
+                  <li><a href= "">1</li></a>
+                  <li><a href= "">2</li></a>
+                  <li><a href= "">3</li></a>
+                  <li><a href= "">4</li></a>
+                  <li><a href= "">5</li></a>
+                  <li><a href= "">we</li></a>
                 </ul>
               </div>
               <div class="table">
-                  <ul class='table-row'>
-                    <li class="week-number">W9</li>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                    <li>we</li>
-                  </ul>
-              </div>
-              <div class="table">
-                    <ul class='table-row'>
-                      <li class="week-number">W10</li>
-                      <li>1</li>
-                      <li>2</li>
-                      <li>3</li>
-                      <li>4</li>
-                      <li>5</li>
-                      <li>we</li>
-                    </ul>
+                <ul class='table-row'>
+                  <li class="week-number">W10</li>
+                  <li><a href= "">1</li></a>
+                  <li><a href= "">2</li></a>
+                  <li><a href= "">3</li></a>
+                  <li><a href= "">4</li></a>
+                  <li><a href= "">5</li></a>
+                  <li><a href= "">we</li></a>
+                </ul>
               </div>
               
         </body>
