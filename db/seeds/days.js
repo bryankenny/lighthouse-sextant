@@ -1,13 +1,60 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('days').del()
     .then(function () {
       return Promise.all([
         // Inserts seed entries
-        knex('table_name').insert({id: 1, colName: 'rowValue1'}),
-        knex('table_name').insert({id: 2, colName: 'rowValue2'}),
-        knex('table_name').insert({id: 3, colName: 'rowValue3'})
+        knex('days').insert({week: "01", day: "1"}),
+        knex('days').insert({week: "01", day: "2"}),
+        knex('days').insert({week: "01", day: "3"}),
+        knex('days').insert({week: "01", day: "4"}),
+        knex('days').insert({week: "01", day: "5"}),
+        knex('days').insert({week: "02", day: "1"}),
+        knex('days').insert({week: "02", day: "2"}),
+        knex('days').insert({week: "02", day: "3"}),
+        knex('days').insert({week: "02", day: "4"}),
+        knex('days').insert({week: "02", day: "5"}),
+        knex('days').insert({week: "03", day: "1"}),
+        knex('days').insert({week: "03", day: "2"}),
+        knex('days').insert({week: "03", day: "3"}),
+        knex('days').insert({week: "03", day: "4"}),
+        knex('days').insert({week: "03", day: "5"}),
+        knex('days').insert({week: "04", day: "1"}),
+        knex('days').insert({week: "04", day: "2"}),
+        knex('days').insert({week: "04", day: "3"}),
+        knex('days').insert({week: "04", day: "4"}),
+        knex('days').insert({week: "04", day: "5"}),
+        knex('days').insert({week: "05", day: "1"}),
+        knex('days').insert({week: "05", day: "2"}),
+        knex('days').insert({week: "05", day: "3"}),
+        knex('days').insert({week: "05", day: "4"}),
+        knex('days').insert({week: "05", day: "5"}),
+        knex('days').insert({week: "06", day: "1"}),
+        knex('days').insert({week: "06", day: "2"}),
+        knex('days').insert({week: "06", day: "3"}),
+        knex('days').insert({week: "06", day: "4"}),
+        knex('days').insert({week: "06", day: "5"}),
+        knex('days').insert({week: "07", day: "1"}),
+        knex('days').insert({week: "07", day: "2"}),
+        knex('days').insert({week: "07", day: "3"}),
+        knex('days').insert({week: "07", day: "4"}),
+        knex('days').insert({week: "07", day: "5"}),
+        knex('days').insert({week: "08", day: "1"}),
+        knex('days').insert({week: "08", day: "2"}),
+        knex('days').insert({week: "08", day: "3"}),
+        knex('days').insert({week: "08", day: "4"}),
+        knex('days').insert({week: "08", day: "5"}),
+        knex('days').insert({week: "09", day: "1"}),
+        knex('days').insert({week: "09", day: "2"}),
+        knex('days').insert({week: "09", day: "3"}),
+        knex('days').insert({week: "09", day: "4"}),
+        knex('days').insert({week: "09", day: "5"}),
+        knex('days').insert({week: "10", day: "1"}),
+        knex('days').insert({week: "10", day: "2"}),
+        knex('days').insert({week: "10", day: "3"}),
+        knex('days').insert({week: "10", day: "4"}),
+        knex('days').insert({week: "10", day: "5"}),
       ]);
     });
 };
