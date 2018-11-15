@@ -149,12 +149,12 @@ app.post('/register', (req, res) => {
     res.render('error', templateVars);
   }
   else {
-    knex('Users').insert({ name: req.body.name }).returning(['id'])
+    knex('Users').insert({ name: name }).returning('id')
       .then(function (result) {
+        console.log(result[0].id)
         req.session.userID = result[0].id;
         res.redirect('index')
-      }
-      )
+      })
       .catch(function (error) {
         let templateVars = {
           errCode: 401,
