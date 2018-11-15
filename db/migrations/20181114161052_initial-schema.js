@@ -27,13 +27,17 @@ exports.up = function(knex, Promise) {
         t.integer("user_id").references("users.id").notNullable();
         t.integer("topic_id").references("topics.id").notNullable();
       })
+      .createTable("days_resources", (t) => {
+        t.increments("id");
+        t.integer("day_id").references("days.id").notNullable();
+        t.integer("resource_id").references("resources.id").notNullable();
+      })
       .createTable("comments", (t) => {
         t.increments("id");
         t.string("text");
         t.timestamp("created_at").defaultTo(knex.fn.now());
         t.integer("user_id").references("users.id").notNullable();
         t.integer("resource_id").references("resources.id").notNullable();
-
       })
       .createTable("reactions", (t) => {
         t.increments("id");
@@ -49,11 +53,12 @@ exports.up = function(knex, Promise) {
 exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema
-      .dropTable("topics")
-      .dropTable("days")
-      .dropTable("days_topics")
-      .dropTable("resources")
       .dropTable("comments")
       .dropTable("reactions")
+      .dropTable("days_resources")
+      .dropTable("resources")
+      .dropTable("days_topics")
+      .dropTable("topics")
+      .dropTable("days")
   ]);
 };
