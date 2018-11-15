@@ -126,7 +126,7 @@ app.get('/searchResults', (req, res) => {
 })
 app.get("/index/:day", (req, res) => {
   knex('Days').join('DaysTopics', 'Days.uniqueId', 'DaysTopics.dayID').join('Topics', 'DaysTopics.topicID', 'Topics.uniqueId').join('Resources', 'Topics.uniqueId', 'Resources.topicID')
-  res.render('indexDay')
+  .then(function(result){res.render('indexDay', result);
 });
 app.get("/index/:resourceID", (req, res) => {
   knex('Resources').select().where({ uniqueId: req.params.resourceID }).then(function (result) {
