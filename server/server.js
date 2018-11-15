@@ -65,39 +65,39 @@ app.get("/", (req, res) => {
   }
 });
 app.get("/index", (req, res) => {
-  res.render('/index')
+  res.render('index')
 })
 app.get("/register", (req, res) => {
   if (req.session.userID) {
     res.redirect('/');
   } else {
-    res.render('/register')
+    res.render('register')
   }
 });
 app.get("/login", (req, res) => {
   if (req.session.userID) {
     res.redirect('/');
   } else {
-    res.render('/login')
+    res.render('login')
   }
 });
 app.get("/profile", (req, res) => {
   if (req.session.userID) {
-    res.render('/profile')
+    res.render('profile')
   } else {
     res.redirect('/');
   }
 });
 app.get("/newResource", (req, res) => {
   if (req.session.userID) {
-    res.render('/newResource')
+    res.render('newResource')
   } else {
     res.redirect('/');
   }
 });
 app.get("/myResources", (req, res) => {
   if (req.session.userID) {
-    res.render('/myResources')
+    res.render('myResources')
   } else {
     res.redirect('/');
   }
