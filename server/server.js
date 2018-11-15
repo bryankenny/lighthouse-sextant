@@ -49,9 +49,9 @@ app.use("/api/users", usersRoutes(knex));
 // users should be able to save an external URL along with a title and description
 // users should be able to search for already-saved resources created by any user
 // users should be able to categorize any resource under a topic
-// users should be able to comment on any resource
+// users should be able to comment on any resource resource.comment
 // users should be able to rate any resource
-// users should be able to like any resource
+// users should be able to like any resource reactions.liked reactions.rating
 // users should be able to view all their own and all liked resources on one page ("My resources")
 // users should be able to register, log in, log out and update their profile
 
@@ -97,14 +97,39 @@ app.get("/newResource", (req, res) => {
 });
 app.get("/myResources", (req, res) => {
   if (req.session.userID) {
-    res.render('myResources')
+    let templateVars = {}
+    knex('resources').select().where({ownerID: userID})
+    .then(function(mine){
+      templateVars += mine
+    })
+    knex('resources').join('reactions', 'resources.ownerID', 'reactions.userID')
+    .then(function(liked) {
+      templateVars =+ liked
+    })
+    
+    res.render('myResources', templateVars)
+
   } else {
     res.redirect('/');
   }
 });
-app.get("/searchResults", (req, res) => {
-  res.render('searchResults')
-});
+app.get('/searchResults', (req, res) => {
+  if (req.session.userID) {
+    if (req.body.name) {
+      knex('resources').select().where({ owner: req.body.owner }).then(function (result) {
+        res.render('/searchResults', result)
+      });
+    }
+    if (req.body.topic) {
+      knex('resources').select().where({ topic: req.body.topic }).then(function (result) {
+        res.render('/searchResults', result)
+      });
+    }
+  }
+  else {
+    res.redirect('/')
+  }
+})
 app.get("/index/:day", (req, res) => {
   res.render('index')
 });
@@ -115,31 +140,43 @@ app.get("/index/:resourceID", (req, res) => {
 // POSTS -----------------------------------------------------------------------
 
 app.post('/register', (req, res) => {
-  if (!req.body.name) { console.log('missing value') }
-  else {
-    for (let user in users) {
-      if (users[user].name === req.body.name) {
-          const templateVars = {
-              errCode: 400,
-              errMsg: 'name already exists'
-          }
-          res.status(400);
-          res.render('error', templateVars);
-      }
+  if (!req.body.name) {
+    const templateVars = {
+      errCode: 400,
+      errMsg: 'missing name'
+    }
+    res.status(400);
+    res.render('error', templateVars);
   }
-    knex('users').insert({ name: req.body.name }).then(function () {
-      console.log(knex('users'));
-    })
-    knex('users').select('id').where({name: req.body.name}).then(function(result) {
+  else {
+    console.log(req.body.name);
+    knex('users').insert({ name: req.body.name })
+
+      .then(function () {
+        console.log(knex('users'));
+        res.render('index')
+      })
+      .catch(function (error) {
+        console.error(error);
+        res.render('error')
+      })
+
+    knex('users').select('id').where({ name: req.body.name })
+      .then(function (result) {
       req.session.userID = result;
-    })
+      })
     res.redirect('/');
   }
 });
 app.post('/login', (req, res) => {
-  const name = req.body.name;
-  knex('users').select(name).then(function (result) {
+  knex('users').select('id').where({ name: req.body.name })
+  .then(function (result) {
     req.session.userID = result;
+    res.render('index')
+  })
+  .catch(function (error) {
+    console.error(error);
+    res.render('error')
   })
 });
 app.post('/logout', (req, res) => {
@@ -153,25 +190,7 @@ app.post('/index', (req, res) => {
     });
   })
 });
-app.post('/search', (req, res) => {
-  if (req.session.userID) {
-    if(req.body.name) {
-      knex('resources').select().where({owner: req.body.owner}).then(function(result) {
-        res.render('/searchResults', result)
-        console.log(knex('resources'));
-      });
-    }
-    if(req.body.topic) {
-      knex('resources').select().where({topic: req.body.topic}).then(function(result) {
-        res.render('/searchResults', result)
-        console.log(knex('resources'));
-      }); 
-    }
-  }
-  else {
-    res.redirect('/')
-  }
-})
+
 app.post('/index/:resourceID', (req, res) => {
 
 });

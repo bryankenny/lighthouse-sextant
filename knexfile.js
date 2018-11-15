@@ -1,4 +1,5 @@
-require('dotenv').config();
+// Keep Heroku from trying to load the nonexistent .env
+if (process.env.NODE_ENV !== "production") require('dotenv').config();
 
 module.exports = {
 
@@ -29,7 +30,11 @@ module.exports = {
       max: 10
     },
     migrations: {
+      directory: './db/migrations',
       tableName: 'migrations'
+    },
+    seeds: {
+      directory: './db/seeds'
     }
   }
 
