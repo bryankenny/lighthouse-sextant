@@ -122,6 +122,7 @@ app.get('/searchResults', (req, res) => {
   }
 })
 app.get("/index/:day", (req, res) => {
+
   res.render('index')
 });
 app.get("/index/:resourceID", (req, res) => {
@@ -144,7 +145,6 @@ app.post('/register', (req, res) => {
     knex('users').insert({ name: name }).returning(['id'])
       .then(function (result) {
         req.session.userID = result[0].id;
-        console.log(result[0].id)
         res.redirect('index')
       }
       )
@@ -163,7 +163,6 @@ app.post('/login', (req, res) => {
   knex('users').select('id').where({ name: name }).returning(['id'])
     .then(function (result) {
       req.session.userID = result[0].id;
-      console.log(result[0].id)
       res.render('index')
     })
     .catch(function (error) {
@@ -194,12 +193,54 @@ app.post('/index', (req, res) => {
         });
     })
 });
-
-app.post('/index/:resourceID', (req, res) => {
-
+app.post('/index/:resourceID/like', (req, res) => {
+  if (req.session.userID) {
+    knex('reactions').where({ 'resourceID': req.params.resourceID }).update({ 'liked': true })
+      .then(function (result) {
+        res.redirect('/');
+      })
+  }
+  else {
+    let templateVars = {
+      errCode: 401,
+      errMsg: 'Login first'
+    }
+    res.status(401);
+    res.render('error', templateVars);
+  }
 });
-
-
+app.post('/index/:resourceID/rate', (req, res) => {
+  if (req.session.userID) {
+    knex('reactions').where({ 'resourceID': req.params.resourceID }).update({ 'rating': req.body.rating })
+      .then(function (result) {
+        res.redirect('/');
+      })
+  }
+  else {
+    let templateVars = {
+      errCode: 401,
+      errMsg: 'Login first'
+    }
+    res.status(401);
+    res.render('error', templateVars);
+  }
+});
+app.post('/index/:resourceID/comment', (req, res) => {
+  if (req.session.userID) {
+    knex('comments').where({ 'resourceID': req.params.resourceID }).update({ 'text': req.body.comment })
+      .then(function (result) {
+        res.redirect('/');
+      })
+  }
+  else {
+    let templateVars = {
+      errCode: 401,
+      errMsg: 'Login first'
+    }
+    res.status(401);
+    res.render('error', templateVars);
+  }
+});
 
 
 app.listen(PORT, () => {
