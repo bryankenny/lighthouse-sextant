@@ -83,7 +83,7 @@ app.get("/login", (req, res) => {
 });
 app.get("/profile", (req, res) => {
   if (req.session.userID) {
-    knex('Users').select('name').where({ uniqueId: req.session.userID })
+    knex('users').select('name').where({ id: req.session.userID })
       .then(function (result) {
         res.render('profile', result);
       })
@@ -94,11 +94,11 @@ app.get("/profile", (req, res) => {
 app.get("/myResources", (req, res) => {
   if (req.session.userID) {
     let templateVars = {}
-    knex('Resources').select().where({ ownerID: userID })
+    knex('resources').select().where({ owner_id: req.session.userID })
       .then(function (mine) {
         templateVars += mine
       })
-    knex('Resources').join('Reactions', 'Resources.ownerID', 'Reactions.userID')
+    knex('resources').join('reactions', 'resources.owner_id', 'reactions.user_id')
       .then(function (liked) {
         templateVars = + liked
       })
@@ -110,12 +110,12 @@ app.get("/myResources", (req, res) => {
 app.get('/searchResults', (req, res) => {
   if (req.session.userID) {
     if (req.body.name) {
-      knex('Resources').select().where({ ownerID: req.body.owner }).then(function (result) {
+      knex('resources').select().where({ owner_id: req.body.owner }).then(function (result) {
         res.render('/searchResults', result)
       });
     }
     if (req.body.topic) {
-      knex('Resources').select().where({ topicID: req.body.topic }).then(function (result) {
+      knex('resources').select().where({ topic_id: req.body.topic }).then(function (result) {
         res.render('/searchResults', result);
       });
     }
@@ -125,13 +125,13 @@ app.get('/searchResults', (req, res) => {
   }
 })
 app.get("/index/:day", (req, res) => {
-  knex('Days').join('DaysTopics', 'Days.uniqueId', 'DaysTopics.dayID').join('Topics', 'DaysTopics.topicID', 'Topics.uniqueId').join('Resources', 'Topics.uniqueId', 'Resources.topicID')
+  knex('days').join('days_topics', 'days.id', 'days_topics.day_id').join('topics', 'days_topics.topic_id', 'topics.id').join('resources', 'topics.id', 'resources.topic_id')
     .then(function (result) {
       res.render('indexDay', result);
     });
 });
 app.get("/index/:resourceID", (req, res) => {
-  knex('Resources').select().where({ uniqueId: req.params.resourceID }).then(function (result) {
+  knex('resources').select().where({ id: req.params.resourceID }).then(function (result) {
     res.render('indexResource', result);
   })
 });
@@ -140,6 +140,7 @@ app.get("/index/:resourceID", (req, res) => {
 
 app.post('/register', (req, res) => {
   const name = req.body.name
+  console.log(name)
   if (!name) {
     const templateVars = {
       errCode: 400,
@@ -149,12 +150,11 @@ app.post('/register', (req, res) => {
     res.render('error', templateVars);
   }
   else {
-    knex('Users').insert({ name: req.body.name }).returning(['uniqueId'])
+    knex('users').insert({ name: req.body.name }).returning(['id'])
       .then(function (result) {
-        req.session.userID = result[0].uniqueId;
+        req.session.userID = result[0].id;
         res.redirect('index')
-      }
-      )
+      })
       .catch(function (error) {
         let templateVars = {
           errCode: 401,
@@ -167,9 +167,9 @@ app.post('/register', (req, res) => {
 });
 app.post('/login', (req, res) => {
   const name = req.body.name
-  knex('Users').select('uniqueId').where({ name: name }).returning(['uniqueId'])
+  knex('users').select('id').where({ name: name }).returning(['id'])
     .then(function (result) {
-      req.session.userID = result[0].uniqueId;
+      req.session.userID = result[0].id;
       res.render('index')
     })
     .catch(function (error) {
@@ -187,14 +187,14 @@ app.post('/logout', (req, res) => {
 });
 app.post('/index', (req, res) => {
   const id = req.session.userID;
-  knex('Users').select('name').where({ uniqueId: id }).returning('uniqueId')
+  knex('users').select('name').where({ id: id }).returning('id')
     .then(function (result) {
       const url = req.body.url;
       const title = req.body.title;
       const description = req.body.description;
       const topic = req.body.topic;
 
-      knex('Resources').insert({ url: url, title: title, description: description, topicID: topic, ownerID: result[0].name })
+      knex('resources').insert({ url: url, title: title, description: description, topic_id: topic, owner_id: result[0].name })
         .then(function () {
 
         });
@@ -202,7 +202,7 @@ app.post('/index', (req, res) => {
 });
 app.post('/index/:resourceID/like', (req, res) => {
   if (req.session.userID) {
-    knex('Reactions').where({ 'resourceID': req.params.resourceID }).update({ 'liked': true })
+    knex('reactions').where({ 'resource_id': req.params.resourceID }).update({ 'liked': true })
       .then(function (result) {
         res.redirect('/');
       })
@@ -218,7 +218,7 @@ app.post('/index/:resourceID/like', (req, res) => {
 });
 app.post('/index/:resourceID/rate', (req, res) => {
   if (req.session.userID) {
-    knex('Reactions').where({ 'resourceID': req.params.resourceID }).update({ 'rating': req.body.rating })
+    knex('reactions').where({ 'resource_id': req.params.resourceID }).update({ 'rating': req.body.rating })
       .then(function (result) {
         res.redirect('/');
       })
@@ -234,7 +234,7 @@ app.post('/index/:resourceID/rate', (req, res) => {
 });
 app.post('/index/:resourceID/comment', (req, res) => {
   if (req.session.userID) {
-    knex('Comments').where({ 'resourceID': req.params.resourceID }).update({ 'text': req.body.comment })
+    knex('comments').where({ 'resource_id': req.params.resourceID }).update({ 'text': req.body.comment })
       .then(function (result) {
         res.redirect('/');
       })
