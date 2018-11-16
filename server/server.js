@@ -12,8 +12,8 @@ const app = express();
 const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 
-const morgan = (ENV === "development") && require('morgan');
-const knexLogger = (ENV === "development") && require('knex-logger');
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
 const cookieSession = require("cookie-session");
 app.use(cookieSession({
