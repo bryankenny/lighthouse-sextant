@@ -90,19 +90,19 @@ module.exports = (knex) => {
       })
   };
 
-  queries.like = function (id) {
+  queries.like = function (user_id, resource_id) {
     knex('reactions').where({ 'resource_id': id })
-      .update({ 'liked': true })
+      .update({'user_id': user_id,'resource_id': resource_id, 'liked': true })
   }
 
-  queries.rate = function (id) {
+  queries.rate = function (user_id, resource_id, rating) {
     knex('reactions').where({ 'resource_id': id })
-      .update({ 'rating': req.body.rating })
+      .update({ 'user_id': user_id,'resource_id': resource_id,'rating': rating })
   }
 
-  queries.comment = function (id) {
+  queries.comment = function (user_id, resource_id, comment) {
     knex('comments').where({ 'resource_id': id })
-      .update({ 'text': req.body.comment })
+      .update({ 'user_id': user_id,'resource_id': resource_id,'text': comment })
   }
   return queries;
 };

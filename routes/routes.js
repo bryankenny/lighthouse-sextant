@@ -145,7 +145,10 @@ module.exports = (knex, query) => {
   });
   router.post('/index/:resourceID/like', (req, res) => {
     if (req.session.userID) {
-      query.like(req.params.resourceID).then(function (result) {
+      const user_id = req.session.userID;
+      const resource_id = req.params.resourceID;
+
+      query.like(user_id, resource_id).then(function (result) {
         res.redirect('/');
       })
     }
@@ -160,7 +163,10 @@ module.exports = (knex, query) => {
   });
   router.post('/index/:resourceID/rate', (req, res) => {
     if (req.session.userID) {
-      query.rate(req.params.resourceID)
+      const user_id = req.session.userID;
+      const resource_id = req.params.resourceID;
+      const rating = req.body.rating;
+      query.rate(user_id, resource_id, rating)
         .then(function (result) {
           res.redirect('/');
         })
@@ -176,7 +182,10 @@ module.exports = (knex, query) => {
   });
   router.post('/index/:resourceID/comment', (req, res) => {
     if (req.session.userID) {
-      query.comment(req.params.resourceID)
+      const user_id = req.session.userID;
+      const resource_id = req.params.resourceID;
+      const comment = req.body.comment;
+      query.comment(user_id, resource_id, comment)
       .then(function (result) {
         res.redirect('/');
       })
