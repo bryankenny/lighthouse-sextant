@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 module.exports = (knex, query) => {
 
@@ -43,17 +43,17 @@ module.exports = (knex, query) => {
   });
   router.get("/profile", (req, res) => {
     if (req.session.userID) {
-      knex('users').select('name').where({ id: req.session.userID })
-        .then(function (result) {
-          res.render('profile', { result });
-        })
+      query.getProfile(req.session.userID)
+      .then(function (result) {
+        res.render('profile', { result });
+      })
     } else {
       res.redirect('/');
     }
   });
   router.get("/myResources", (req, res) => {
     if (req.session.userID) {
-      query.getMyResources(req.session.userID).then( (results) => {
+      query.getMyResources(req.session.userID).then((results) => {
         res.render('myResources', results);
       });
     } else {
@@ -63,13 +63,13 @@ module.exports = (knex, query) => {
   router.get('/searchResults', (req, res) => {
     if (req.session.userID) {
       if (req.query.name) {
-        query.getUserResources(req.query.name).then( (results) => {
+        query.getUserResources(req.query.name).then((results) => {
           // console.log(results);
-          res.render('searchResults', {results})
+          res.render('searchResults', { results })
         });
       } else if (req.query.topic) {
-        query.getTopicResources(req.query.topic).then( (results) => {
-          res.render('searchResults', {results});
+        query.getTopicResources(req.query.topic).then((results) => {
+          res.render('searchResults', { results });
         });
       } else {
         res.redirect("/");
@@ -79,12 +79,12 @@ module.exports = (knex, query) => {
     }
   })
   router.get("/index/:day", (req, res) => {
-    query.getDay(req.params.day).then ( (results) => {
+    query.getDay(req.params.day).then((result) => {
       res.render('day', { result });
-    })   
-      });
+    })
+  });
   router.get("/index/:resourceID", (req, res) => {
-    query.getResource(req.params.resourceID).then ( (results) => {
+    query.getResource(req.params.resourceID).then((result) => {
       res.render('resource', { result });
     })
   });
@@ -103,11 +103,10 @@ module.exports = (knex, query) => {
       res.render('error', templateVars);
     }
     else {
-      knex('users').insert({ name: req.body.name }).returning(['id'])
-        .then(function (result) {
-          req.session.userID = result[0].id;
-          res.redirect('index')
-        })
+      query.registerUser(req.body.name).then((result) => {
+        req.session.userID = result[0].id;
+        res.redirect('index')
+      })
         .catch(function (error) {
           let templateVars = {
             errCode: 401,
@@ -120,11 +119,10 @@ module.exports = (knex, query) => {
   });
   router.post('/login', (req, res) => {
     const name = req.body.name
-    knex('users').select('id').where({ name: name }).returning(['id'])
-      .then(function (result) {
-        req.session.userID = result[0].id;
-        res.render('index')
-      })
+    query.login(name).then(function (result) {
+      req.session.userID = result[0].id;
+      res.render('index')
+    })
       .catch(function (error) {
         let templateVars = {
           errCode: 401,
@@ -140,25 +138,16 @@ module.exports = (knex, query) => {
   });
   router.post('/index', (req, res) => {
     const id = req.session.userID;
-    knex('users').select('name').where({ id: id }).returning('id')
-      .then(function (result) {
-        const url = req.body.url;
-        const title = req.body.title;
-        const description = req.body.description;
-        const topic = req.body.topic;
-
-        knex('resources').insert({ url: url, title: title, description: description, topic_id: topic, owner_id: result[0].id })
-          .then(function () {
-
-          });
-      })
+    const body = req.body;
+    query.newResource(id, body).then(function () {
+      res.redirect('/')
+    })
   });
   router.post('/index/:resourceID/like', (req, res) => {
     if (req.session.userID) {
-      knex('reactions').where({ 'resource_id': req.params.resourceID }).update({ 'liked': true })
-        .then(function (result) {
-          res.redirect('/');
-        })
+      query.like(req.params.resourceID).then(function (result) {
+        res.redirect('/');
+      })
     }
     else {
       let templateVars = {
@@ -171,7 +160,7 @@ module.exports = (knex, query) => {
   });
   router.post('/index/:resourceID/rate', (req, res) => {
     if (req.session.userID) {
-      knex('reactions').where({ 'resource_id': req.params.resourceID }).update({ 'rating': req.body.rating })
+      query.rate(req.params.resourceID)
         .then(function (result) {
           res.redirect('/');
         })
@@ -187,10 +176,10 @@ module.exports = (knex, query) => {
   });
   router.post('/index/:resourceID/comment', (req, res) => {
     if (req.session.userID) {
-      knex('comments').where({ 'resource_id': req.params.resourceID }).update({ 'text': req.body.comment })
-        .then(function (result) {
-          res.redirect('/');
-        })
+      query.comment(req.params.resourceID)
+      .then(function (result) {
+        res.redirect('/');
+      })
     }
     else {
       let templateVars = {
