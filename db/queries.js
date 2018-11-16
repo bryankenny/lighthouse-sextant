@@ -52,6 +52,16 @@ module.exports = (knex) => {
 
   };
 
+  queries.getRecentResources = function () {
+
+    return knex("resources")
+      .select("*")
+      .orderBy("id", "desc")
+      .limit(5)
+      .then((results) => results);
+
+  };
+
   queries.getDay = function (day) {
 
     return knex('days').join('days_topics', 'days.id', 'days_topics.day_id')
