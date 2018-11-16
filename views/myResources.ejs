@@ -13,9 +13,14 @@
     <br>
     <br>
     <main class="container">
-        <% for (let x in templateVars){ %>
-          <%= result[x].id %>
-          <% } %>
+        <% for (let x in mine){ %>
+          <%= mine[x].title %>
+        <% } %>
+        <hr>
+        <% for (let x in liked){ %>
+          <%= liked[x].title %>
+        <% } %>
+
             <!-- <section class="new-tweet">
 
               <h2></h2>
