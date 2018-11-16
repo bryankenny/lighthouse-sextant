@@ -69,7 +69,7 @@ module.exports = (knex) => {
       .join('topics', 'days_topics.topic_id', 'topics.id')
       .join('resources_topics', 'topics.id', 'resources_topics.topic_id')
       .where({ 'days.day': day })
-      .orderBy("topics.topic")
+      .orderBy("topics.name")
       .select("*")
       .then((result) => result);
 
