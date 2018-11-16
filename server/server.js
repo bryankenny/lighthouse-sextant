@@ -195,7 +195,7 @@ app.post('/index', (req, res) => {
       const description = req.body.description;
       const topic = req.body.topic;
 
-      knex('resources').insert({ url: url, title: title, description: description, topic_id: topic, owner_id: result[0].name })
+      knex('resources').insert({ url: url, title: title, description: description, topic_id: topic, owner_id: result[0].id })
         .then(function () {
 
         });
