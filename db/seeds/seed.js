@@ -20,3 +20,4 @@ exports.seed = function(knex, Promise) {
   }, Promise.resolve());
 
 }
+
