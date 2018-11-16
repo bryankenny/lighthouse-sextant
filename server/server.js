@@ -13,7 +13,7 @@ const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 
 const morgan = (ENV) && require('morgan');
-const knexLogger = (ENV) require('knex-logger');
+const knexLogger = (ENV) && require('knex-logger');
 
 const cookieSession = require("cookie-session");
 app.use(cookieSession({
