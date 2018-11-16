@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") require('dotenv').config();
 module.exports = {
 
   development: {
+    debug: true,
     client: 'postgresql',
     connection: {
       host     : process.env.DB_HOST,
