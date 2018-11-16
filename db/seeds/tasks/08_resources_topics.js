@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
   return Promise.all([
     knex('resources_topics').insert({resource_id: 1,  topic_id: 17}),
     knex('resources_topics').insert({resource_id: 1,  topic_id: 9}),

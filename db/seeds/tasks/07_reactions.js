@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
   return Promise.all([
     knex('reactions').insert({user_id: 1, resource_id: 1, liked: true, rating: 3}),
     knex('reactions').insert({user_id: 2, resource_id: 2, liked: false, rating: 1}),

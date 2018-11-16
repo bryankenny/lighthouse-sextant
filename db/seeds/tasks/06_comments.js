@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
   return Promise.all([
     knex('comments').insert({user_id: 1, resource_id: 1,  text: "This is a comment"}),
     knex('comments').insert({user_id: 2, resource_id: 2,  text: "Hi there, I'm a comment"}),

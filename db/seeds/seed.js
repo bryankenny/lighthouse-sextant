@@ -1,23 +1,22 @@
 exports.seed = function(knex, Promise) {
 
   const tasks = [
-    require("./tasks/clear")(knex, Promise),
-    require("./tasks/users")(knex, Promise),
-    require("./tasks/days")(knex, Promise),
-    require("./tasks/topics")(knex, Promise),
-    require("./tasks/days_topics")(knex, Promise),
-    require("./tasks/resources")(knex, Promise),
-    require("./tasks/comments")(knex, Promise),
-    require("./tasks/reactions")(knex, Promise),
-    require("./tasks/resources_topics")(knex, Promise)
-  ]
+    require("./tasks/00_clear"),
+    require("./tasks/01_users"),
+    require("./tasks/02_days"),
+    require("./tasks/03_topics"),
+    require("./tasks/04_days_topics"),
+    require("./tasks/05_resources"),
+    require("./tasks/06_comments"),
+    require("./tasks/07_reactions"),
+    require("./tasks/08_resources_topics")
+  ];
 
-  return tasks.reduce((promiseChain, currentTask) => {
-    return promiseChain.then( chainResults =>
-      currentTask.then(currentResult =>
-        [ ...chainResults, currentResult ]
-      )
-    );
-  }, Promise.resolve([]));
+  // https://css-tricks.com/why-using-reduce-to-sequentially-resolve-promises-works/
+  // Tables with foreign key constraints didn't like being run out of order
+  return tasks.reduce( async (previousPromise, nextTask) => {
+    await previousPromise;
+    return nextTask(knex, Promise);
+  }, Promise.resolve());
 
 }

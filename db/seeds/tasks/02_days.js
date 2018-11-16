@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
   return Promise.all([
     knex('days').insert({week: "01", day: "1"}),
     knex('days').insert({week: "01", day: "2"}),

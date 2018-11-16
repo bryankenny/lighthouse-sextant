@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
   return Promise.all([
     knex('resources').insert({
       url:          "https://medium.com/@HalahSalih/how-to-deploy-an-",
