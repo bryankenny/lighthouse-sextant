@@ -1,9 +1,10 @@
 "use strict";
+const ENV = process.env.ENV || "development";
 
-require('dotenv').config();
+(ENV === "development") && require('dotenv').config();
 
 const PORT = process.env.PORT || 8080;
-const ENV = process.env.ENV || "development";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
@@ -12,8 +13,23 @@ const app = express();
 const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 
-const morgan = require('morgan');
-const knexLogger = require('knex-logger');
+if (ENV === "development") {
+
+  const morgan = require('morgan');
+  const knexLogger = require('knex-logger');
+
+  console.log("starting in dev environment");
+  // Load the logger first so all (static) HTTP requests are logged to STDOUT
+  // 'dev' = Concise output colored by response status for development use.
+  //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+  app.use(morgan('dev'));
+
+  // Log knex SQL queries to STDOUT as well
+  app.use(knexLogger(knex));
+
+}
+
+
 
 const cookieSession = require("cookie-session");
 app.use(cookieSession({
@@ -25,13 +41,6 @@ app.use(cookieSession({
 // Seperated Routes for each Resource
 const usersRoutes = require("../routes/users");
 
-// Load the logger first so all (static) HTTP requests are logged to STDOUT
-// 'dev' = Concise output colored by response status for development use.
-//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
-(morgan) && app.use(morgan('dev'));
-
-// Log knex SQL queries to STDOUT as well
-(knexLogger) && app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -86,7 +95,7 @@ app.get("/profile", (req, res) => {
   if (req.session.userID) {
     knex('users').select('name').where({ id: req.session.userID })
       .then(function (result) {
-        res.render('profile', {result});
+        res.render('profile', { result });
       })
   } else {
     res.redirect('/');
@@ -95,16 +104,18 @@ app.get("/profile", (req, res) => {
 app.get("/myResources", (req, res) => {
   if (req.session.userID) {
     let templateVars = {}
-    knex('resources').select().where({ owner_id: req.session.userID })
+    knex('resources').select().where({ user_id: req.session.userID })
       .then(function (mine) {
         templateVars += mine;
       })
-    knex('users').join('reactions', 'users.id', 'reactions.user_id').join('resources', 'reactions.resource_id', 'resources.id')
-      .where({user_id: req.session.userID, liked: true})
+    knex('users').select('*')
+      .join('reactions', 'users.id', 'reactions.user_id')
+      .join('resources', 'reactions.resource_id', 'resources.id')
       .then(function (liked) {
+        this.where('user_id', req.session.userID)
         templateVars += liked;
       })
-    res.render('myResources', {templateVars})
+    res.render('myResources', { templateVars })
   } else {
     res.redirect('/');
   }
@@ -113,12 +124,12 @@ app.get('/searchResults', (req, res) => {
   if (req.session.userID) {
     if (req.body.name) {
       knex('resources').select().where({ owner_id: req.body.owner }).then(function (result) {
-        res.render('/searchResults', {result})
+        res.render('/searchResults', { result })
       });
     }
     if (req.body.topic) {
       knex('resources').select().where({ topic_id: req.body.topic }).then(function (result) {
-        res.render('/searchResults', {result});
+        res.render('/searchResults', { result });
       });
     }
   }
@@ -127,15 +138,16 @@ app.get('/searchResults', (req, res) => {
   }
 })
 app.get("/index/:day", (req, res) => {
-  knex('days').join('days_topics', 'days.id', 'days_topics.day_id').join('topics', 'days_topics.topic_id', 'topics.id').join('resources_topics', 'topics.id', 'resources_topics.topic_id')
+  knex('days').join('days_topics', 'days.id', 'days_topics.day_id')
+    .join('topics', 'days_topics.topic_id', 'topics.id')
+    .join('resources_topics', 'topics.id', 'resources_topics.topic_id')
     .then(function (result) {
-      console.log(result)
-      res.render('day', {result});
+      res.render('day', { result });
     });
 });
 app.get("/index/:resourceID", (req, res) => {
   knex('resources').select().where({ id: req.params.resourceID }).then(function (result) {
-    res.render('resource', {result});
+    res.render('resource', { result });
   })
 });
 
@@ -150,7 +162,7 @@ app.post('/register', (req, res) => {
       errMsg: 'missing name'
     }
     res.status(400);
-    res.render('error', {templateVars});
+    res.render('error', templateVars);
   }
   else {
     knex('users').insert({ name: req.body.name }).returning(['id'])
@@ -164,7 +176,7 @@ app.post('/register', (req, res) => {
           errMsg: 'name already exists'
         }
         res.status(401);
-        res.render('error', {templateVars});
+        res.render('error', templateVars);
       })
   }
 });
