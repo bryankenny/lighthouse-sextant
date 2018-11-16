@@ -64,10 +64,13 @@ module.exports = (knex) => {
 
   queries.getDay = function (day) {
 
-    return knex('days').join('days_topics', 'days.id', 'days_topics.day_id')
+    return knex('days')
+      .join('days_topics', 'days.id', 'days_topics.day_id')
       .join('topics', 'days_topics.topic_id', 'topics.id')
       .join('resources_topics', 'topics.id', 'resources_topics.topic_id')
       .where({ 'days.day': day })
+      .orderBy("topics.topic")
+      .select("*")
       .then((result) => result);
 
   }
