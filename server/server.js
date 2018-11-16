@@ -71,14 +71,14 @@ app.get("/register", (req, res) => {
   if (req.session.userID) {
     res.redirect('/');
   } else {
-    res.render('register')
+    res.render('register');
   }
 });
 app.get("/login", (req, res) => {
   if (req.session.userID) {
     res.redirect('/');
   } else {
-    res.render('login')
+    res.render('login');
   }
 });
 app.get("/profile", (req, res) => {
@@ -96,11 +96,12 @@ app.get("/myResources", (req, res) => {
     let templateVars = {}
     knex('resources').select().where({ owner_id: req.session.userID })
       .then(function (mine) {
-        templateVars += mine
+        templateVars += mine;
       })
-    knex('resources').join('reactions', 'resources.owner_id', 'reactions.user_id')
+    knex('users').join('reactions', 'users.id', 'reactions.user_id').join('resources', 'reactions.resource_id', 'resources.id')
+      .where({user_id: req.session.userID, liked: true})
       .then(function (liked) {
-        templateVars = + liked
+        templateVars += liked;
       })
     res.render('myResources', templateVars)
   } else {
