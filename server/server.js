@@ -86,7 +86,7 @@ app.get("/profile", (req, res) => {
   if (req.session.userID) {
     knex('users').select('name').where({ id: req.session.userID })
       .then(function (result) {
-        res.render('profile', result);
+        res.render('profile', {result});
       })
   } else {
     res.redirect('/');
@@ -104,7 +104,7 @@ app.get("/myResources", (req, res) => {
       .then(function (liked) {
         templateVars += liked;
       })
-    res.render('myResources', templateVars)
+    res.render('myResources', {templateVars})
   } else {
     res.redirect('/');
   }
@@ -113,12 +113,12 @@ app.get('/searchResults', (req, res) => {
   if (req.session.userID) {
     if (req.body.name) {
       knex('resources').select().where({ owner_id: req.body.owner }).then(function (result) {
-        res.render('/searchResults', result)
+        res.render('/searchResults', {result})
       });
     }
     if (req.body.topic) {
       knex('resources').select().where({ topic_id: req.body.topic }).then(function (result) {
-        res.render('/searchResults', result);
+        res.render('/searchResults', {result});
       });
     }
   }
@@ -129,12 +129,13 @@ app.get('/searchResults', (req, res) => {
 app.get("/index/:day", (req, res) => {
   knex('days').join('days_topics', 'days.id', 'days_topics.day_id').join('topics', 'days_topics.topic_id', 'topics.id').join('resources_topics', 'topics.id', 'resources_topics.topic_id')
     .then(function (result) {
-      res.render('day', result);
+      console.log(result)
+      res.render('day', {result});
     });
 });
 app.get("/index/:resourceID", (req, res) => {
   knex('resources').select().where({ id: req.params.resourceID }).then(function (result) {
-    res.render('resource', result);
+    res.render('resource', {result});
   })
 });
 
@@ -149,7 +150,7 @@ app.post('/register', (req, res) => {
       errMsg: 'missing name'
     }
     res.status(400);
-    res.render('error', templateVars);
+    res.render('error', {templateVars});
   }
   else {
     knex('users').insert({ name: req.body.name }).returning(['id'])
@@ -163,7 +164,7 @@ app.post('/register', (req, res) => {
           errMsg: 'name already exists'
         }
         res.status(401);
-        res.render('error', templateVars);
+        res.render('error', {templateVars});
       })
   }
 });
