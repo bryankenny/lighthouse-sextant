@@ -79,15 +79,12 @@ module.exports = (knex, query) => {
     }
   })
   router.get("/index/:day", (req, res) => {
-    knex('days').join('days_topics', 'days.id', 'days_topics.day_id')
-      .join('topics', 'days_topics.topic_id', 'topics.id')
-      .join('resources_topics', 'topics.id', 'resources_topics.topic_id')
-      .then(function (result) {
-        res.render('day', { result });
+    query.getDay(req.params.day).then ( (results) => {
+      res.render('day', { result });
+    })   
       });
-  });
   router.get("/index/:resourceID", (req, res) => {
-    knex('resources').select().where({ id: req.params.resourceID }).then(function (result) {
+    query.getResource(req.params.resourceID).then ( (results) => {
       res.render('resource', { result });
     })
   });
