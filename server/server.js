@@ -126,14 +126,14 @@ app.get('/searchResults', (req, res) => {
   }
 })
 app.get("/index/:day", (req, res) => {
-  knex('days').join('days_topics', 'days.id', 'days_topics.day_id').join('topics', 'days_topics.topic_id', 'topics.id').join('resources', 'topics.id', 'resources.topic_id')
+  knex('days').join('days_topics', 'days.id', 'days_topics.day_id').join('topics', 'days_topics.topic_id', 'topics.id').join('resources_topics', 'topics.id', 'resources_topics.topic_id')
     .then(function (result) {
-      res.render('indexDay', result);
+      res.render('day', result);
     });
 });
 app.get("/index/:resourceID", (req, res) => {
   knex('resources').select().where({ id: req.params.resourceID }).then(function (result) {
-    res.render('indexResource', result);
+    res.render('resource', result);
   })
 });
 
