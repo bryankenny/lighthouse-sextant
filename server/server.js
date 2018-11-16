@@ -94,7 +94,7 @@ app.get("/profile", (req, res) => {
 app.get("/myResources", (req, res) => {
   if (req.session.userID) {
     let templateVars = {}
-    knex('resources').select().where({ owner_id: userID })
+    knex('resources').select().where({ owner_id: req.session.userID })
       .then(function (mine) {
         templateVars += mine
       })
@@ -152,12 +152,10 @@ app.post('/register', (req, res) => {
   else {
     knex('users').insert({ name: req.body.name }).returning(['id'])
       .then(function (result) {
-        console.log(result[0].id)
         req.session.userID = result[0].id;
         res.redirect('index')
       })
       .catch(function (error) {
-        console.log(error)
         let templateVars = {
           errCode: 401,
           errMsg: 'name already exists'
