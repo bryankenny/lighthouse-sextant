@@ -13,6 +13,12 @@ const app = express();
 const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 
+const query = require("../db/queries")(knex);
+
+const routes = require("../routes/routes");
+
+
+
 if (ENV === "development") {
 
   const morgan = require('morgan');
@@ -38,10 +44,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
-// Seperated Routes for each Resource
-const usersRoutes = require("../routes/users");
-
-
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -53,6 +55,7 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
+<<<<<<< HEAD
 app.use("/api/users", usersRoutes(knex));
 
 // Requirements:
@@ -264,6 +267,9 @@ app.post('/index/:resourceID/comment', (req, res) => {
   }
 });
 
+=======
+app.use("/", routes(knex, query));
+>>>>>>> 563cdaad9a37e22b8f86beedbf1fe675e5759958
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
