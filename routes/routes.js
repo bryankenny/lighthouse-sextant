@@ -78,12 +78,12 @@ module.exports = (knex, query) => {
       res.redirect('/')
     }
   })
-  router.get("/index/day/:day", (req, res) => {
+  router.get("/day/:day", (req, res) => {
     query.getDay(req.params.day).then((result) => {
       res.render('day', { result });
     })
   });
-  router.get("/index/resource/:resourceID", (req, res) => {
+  router.get("/resource/:resourceID", (req, res) => {
     query.getResource(req.params.resourceID).then((result) => {
       res.render('resource', { result });
     })
@@ -143,7 +143,7 @@ module.exports = (knex, query) => {
       res.redirect('/')
     })
   });
-  router.post('/index/resource/:resourceID/like', (req, res) => {
+  router.post('/resource/:resourceID/like', (req, res) => {
     if (req.session.userID) {
       const user_id = req.session.userID;
       const resource_id = req.params.resourceID;
@@ -161,7 +161,7 @@ module.exports = (knex, query) => {
       res.render('error', templateVars);
     }
   });
-  router.post('/index/resource/:resourceID/rate', (req, res) => {
+  router.post('/resource/:resourceID/rate', (req, res) => {
     if (req.session.userID) {
       const user_id = req.session.userID;
       const resource_id = req.params.resourceID;
@@ -180,7 +180,7 @@ module.exports = (knex, query) => {
       res.render('error', templateVars);
     }
   });
-  router.post('/index/resource/:resourceID/comment', (req, res) => {
+  router.post('/resource/:resourceID/comment', (req, res) => {
     if (req.session.userID) {
       const user_id = req.session.userID;
       const resource_id = req.params.resourceID;

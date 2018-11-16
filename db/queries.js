@@ -69,6 +69,7 @@ module.exports = (knex) => {
       .join('resources_topics', 'topics.id', 'resources_topics.topic_id')
       .where({ 'days.day': day })
       .then((result) => result);
+
   }
 
   queries.getResource = function (resourceID) {
