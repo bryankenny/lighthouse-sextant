@@ -13,6 +13,8 @@ const app = express();
 const knexConfig = require("../knexfile");
 const knex = require("knex")(knexConfig[ENV]);
 
+const query = require("../db/queries")(knex);
+
 if (ENV === "development") {
 
   const morgan = require('morgan');
@@ -103,37 +105,28 @@ app.get("/profile", (req, res) => {
 });
 app.get("/myResources", (req, res) => {
   if (req.session.userID) {
-    let templateVars = {}
-    knex('resources').select().where({ user_id: req.session.userID })
-      .then(function (mine) {
-        templateVars += mine;
-      })
-    knex('users').select('*')
-      .join('reactions', 'users.id', 'reactions.user_id')
-      .join('resources', 'reactions.resource_id', 'resources.id')
-      .then(function (liked) {
-        this.where('user_id', req.session.userID)
-        templateVars += liked;
-      })
-    res.render('myResources', { templateVars })
+    query.getMyResources(req.session.userID).then( (results) => {
+      res.render('myResources', results);
+    });
   } else {
     res.redirect('/');
   }
 });
 app.get('/searchResults', (req, res) => {
   if (req.session.userID) {
-    if (req.body.name) {
-      knex('resources').select().where({ owner_id: req.body.owner }).then(function (result) {
-        res.render('/searchResults', { result })
+    if (req.query.name) {
+      query.getUserResources(req.query.name).then( (results) => {
+        // console.log(results);
+        res.render('searchResults', {results})
       });
-    }
-    if (req.body.topic) {
-      knex('resources').select().where({ topic_id: req.body.topic }).then(function (result) {
-        res.render('/searchResults', { result });
+    } else if (req.query.topic) {
+      query.getTopicResources(req.query.topic).then( (results) => {
+        res.render('searchResults', {results});
       });
+    } else {
+      res.redirect("/");
     }
-  }
-  else {
+  } else {
     res.redirect('/')
   }
 })

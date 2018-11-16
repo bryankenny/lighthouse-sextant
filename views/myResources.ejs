@@ -13,10 +13,35 @@
     <br>
     <br>
     <main class="container">
+<<<<<<< HEAD
             <% for (let r in templateVars){ %>
                 <%= templateVars[r].topic %>
                 <% return templateVars; %>
                 <% } %>
+=======
+        <% for (let x in mine){ %>
+          <%= mine[x].title %>
+        <% } %>
+        <hr>
+        <% for (let x in liked){ %>
+          <%= liked[x].title %>
+        <% } %>
+
+            <!-- <section class="new-tweet">
+
+              <h2></h2>
+
+              <form name="myform "action="/tweets/" method="post">
+                <textarea class="text-area" name="text" placeholder="What are you humming about?" autofocus=""></textarea>
+                <input class="tweetButton" type="submit" value="Tweet">
+                <span id="charCount" class="counter">140</span>
+                <span class = "userTweetForm"> </span>.
+              </form>
+            </section>
+           <div><section class="tweet-list">
+           <!-- Tweets go here -->
+           </section></div>
+>>>>>>> 29164c93d31e667aa3b583afb6a4ac67c0e19951
       -->
           </main>
   </body>
