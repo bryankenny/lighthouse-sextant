@@ -1,2 +1,34 @@
-<% include ./partials/_header %>
-<link rel="stylesheet" href="/styles/table.css"/>
+<!DOCTYPE html>
+<html>
+  <header>
+    <title>Login</title>
+    <% include ./partials/_header %>
+  </header>
+  <link rel="stylesheet" href="/styles/table.css"/>
+  <head>
+    <a href="/register">Register Here</a>
+</head>
+  <body>
+    <br>
+    <br>
+    <br>
+    <main class="container">
+
+            <section class="new-tweet">
+     
+              <h2>Compose Tweet</h2>
+     
+              <form name="myform "action="/tweets/" method="post">
+                <textarea class="text-area" name="text" placeholder="What are you humming about?" autofocus=""></textarea>
+                <input class="tweetButton" type="submit" value="Tweet">
+                <span id="charCount" class="counter">140</span>
+                <span class = "userTweetForm"> </span>. <!--span is an HTML tag like div, mostly used for styling by ID or class  -->
+              </form>
+            </section>
+           <div><section class="tweet-list">
+           <!-- Tweets go here -->
+           </section></div>
+     
+          </main>
+  </body>
+</html>
