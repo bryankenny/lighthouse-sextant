@@ -241,7 +241,7 @@ app.post('/index/:resourceID/comment', (req, res) => {
       .then(function (result) {
         res.redirect('/');
       })
-  }
+  } 
   else {
     let templateVars = {
       errCode: 401,
