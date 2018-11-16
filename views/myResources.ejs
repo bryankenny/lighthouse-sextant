@@ -13,15 +13,15 @@
     <br>
     <br>
     <main class="container">
-
-        <% for (let x in mine){ %>
-          <%= mine[x].title %>
+<ul>
+  <li>  <% for (let x in mine){ %>
+        <%= mine[x].title %>
         <% } %>
         <hr>
         <% for (let x in liked){ %>
           <%= liked[x].title %>
-        <% } %>
-
+  </li> <% } %>
+</ul>
           </main>
   </body>
 </html>
