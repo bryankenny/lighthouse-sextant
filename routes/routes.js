@@ -44,9 +44,9 @@ module.exports = (knex, query) => {
   router.get("/profile", (req, res) => {
     if (req.session.userID) {
       query.getProfile(req.session.userID)
-      .then(function (result) {
-        res.render('profile', { result });
-      })
+        .then(function (result) {
+          res.render('profile', { result });
+        })
     } else {
       res.redirect('/');
     }
@@ -186,9 +186,9 @@ module.exports = (knex, query) => {
       const resource_id = req.params.resourceID;
       const comment = req.body.comment;
       query.comment(user_id, resource_id, comment)
-      .then(function (result) {
-        res.redirect('/');
-      })
+        .then(function (result) {
+          res.redirect('/');
+        })
     }
     else {
       let templateVars = {
