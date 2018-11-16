@@ -73,7 +73,7 @@ module.exports = (knex) => {
   }
 
   queries.login = function (name) {
-    return knex('users').select('name').where({ 'users.name': name }).returning('id')
+    return knex('users').select('id').where({ 'users.name': name })
       .then((result) => result);
   }
 
