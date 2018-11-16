@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
   return Promise.all([
     knex("topics").insert({name: "Javascript"}),
     knex("topics").insert({name: "HTML"}),

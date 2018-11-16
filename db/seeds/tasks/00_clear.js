@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+module.exports = function(knex, Promise) {
 
   // Tables need to be cleared and have their ID sequences reset
   // knex.del() doesn't reset the sequence, and knex.truncate()
