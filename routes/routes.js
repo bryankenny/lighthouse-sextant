@@ -41,7 +41,7 @@ module.exports = (knex, query) => {
 
   router.get("/register", (req, res) => {
 
-    if (req.session.userID) res.redirect("/index");
+    if (req.session.userID) res.redirect("/");
 
     res.render('register');
 
@@ -50,7 +50,7 @@ module.exports = (knex, query) => {
 
   router.get("/login", (req, res) => {
 
-    if (req.session.userID) res.redirect("/index");
+    if (req.session.userID) res.redirect("/");
 
     res.render('login');
 
@@ -131,7 +131,7 @@ module.exports = (knex, query) => {
       query.registerUser(req.body.name)
         .then((results) => {
           req.session.userID = results[0].id;
-          res.redirect('/index')
+          res.redirect('/')
         })
         .catch(function (error) {
           let templateVars = {
@@ -153,7 +153,7 @@ module.exports = (knex, query) => {
     query.login(name)
       .then(function (results) {
         req.session.userID = results[0].id;
-        res.redirect('/index')
+        res.redirect('/')
       })
       .catch(function (error) {
         let templateVars = {
