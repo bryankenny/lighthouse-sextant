@@ -10,6 +10,11 @@
   <body>
     <table>
       <tr>
+        <p style='margin-top:5em'><%= results[0].title %></p>
+        <p style='margin-top:5em'><%= results[0].description %></p>
+
+      </tr>
+      <tr>
     <form method=POST action='/resource/:resourceID/like'>
         <button type="submit" name=liked style='margin-top: 5em'>like</button>
     

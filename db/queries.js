@@ -119,24 +119,28 @@ module.exports = (knex) => {
 
   queries.like = function (user_id, resource_id) {
 
-    knex('reactions')
+    return knex('reactions')
       .where({ 'resource_id': resource_id })
       .update({ 'user_id': user_id, 'resource_id': resource_id, 'liked': true })
+      .then((result) => result);
 
   }
 
   queries.rate = function (user_id, resource_id, rating) {
 
-    knex('reactions')
+    return knex('reactions')
       .where({ 'resource_id': resource_id })
       .update({ 'user_id': user_id, 'resource_id': resource_id, 'rating': rating })
-  }
+      .then((result) => result);
+
+    }
 
   queries.comment = function (user_id, resource_id, comment) {
 
-    knex('comments')
+    return knex('comments')
       .where({ 'resource_id': resource_id })
       .insert({ 'user_id': user_id, 'resource_id': resource_id, 'text': comment })
+      .then((result) => result);
 
   }
 
