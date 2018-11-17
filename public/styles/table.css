@@ -13602,6 +13602,7 @@
   .teacher-holder {
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
+    position: fixed;
     z-index: 1
   }
 
