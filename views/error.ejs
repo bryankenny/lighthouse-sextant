@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<% include ./partials/_header %>
 
-<head>
- <title>ERROR</title>
-</head>
 
-<body>
- <h2><%= errCode %>ERROR</h2>
- <h3><%= errMsg %></h3>
- <hr>
- <h2><a href="/">Back to Home page</a></h2>
-</body>
+  <div class="pinnednote activity">
+      <div class="name"><%= errCode %> - <%= errMsg %></div>
+  </div>
 
-</html>
+  <div class="pinned-content">
+    <div class="instructions">
+      <p>Hopefully that means something to you, because we're stumped.</p>
+    </div>
+  </div>
+
+<a href="/">Home</a>
+
+<% include ./partials/_footer %>

@@ -1,42 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <header>
-    <% include ./partials/_header %>
-  </header>
-  <link rel="stylesheet" href="/styles/table.css"/>
-  <head>
+<% include ./partials/_header %>
 
-</head>
-  <body>
-    <table>
-      <tr>
-        <p style='margin-top:5em'><%= results[0].title %></p>
-        <p style='margin-top:5em'><%= results[0].description %></p>
+<div class="pinnednote activity">
+  <div class="name"><%= results[0].title %></div>
+</div>
+<div class="pinned-content">
+  <p><%= results[0].description %></p>
 
-      </tr>
-      <tr>
-    <form method=POST action='/resource/:resourceID/like'>
-        <button type="submit" name=liked style='margin-top: 5em'>like</button>
-    
-    </form>
+  <form method=POST action='/resource/:resourceID/like'>
+      <button type="submit" name=liked>like</button>
 
-    <form method=POST action='/resource/:resourceID/rate'>
-      <select type='submit'  onchange="this.form.submit()"  name="rating">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+  </form>
 
-        </select>
-    </form>
+  <form method=POST action='/resource/:resourceID/rate'>
+    <select type='submit' onchange="this.form.submit()"  name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
 
-      <form method=POST action='/resource/:resourceID/comment'>
-        <textarea name=comment style='margin-top: 5em'>add comment</textarea>
-        <button type="submit">Submit Comment</button>
-      </form>
-    </tr>
-    </table>
+      </select>
+  </form>
 
-  </body>
-</html>
+  <form method=POST action='/resource/:resourceID/comment'>
+    <textarea name="comment">add comment</textarea>
+    <button type="submit">Submit Comment</button>
+  </form>
+
+</div>
+
+<% include ./partials/_footer %>

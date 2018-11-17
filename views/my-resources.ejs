@@ -1,0 +1,13 @@
+<% include ./partials/_header %>
+
+<h3>My Resources</h3>
+
+<div class="container">
+  <ul>
+    <% for (let x in liked){ %>
+      <li><%= liked[x].title %></li>
+    <% } %>
+  </ul>
+</div>
+
+<% include ./partials/_footer %>

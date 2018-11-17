@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <header>
-    <% include ./partials/_header %>
-  </header>
-  <link rel="stylesheet" href="/styles/table.css"/>
-  <head>
-    
-</head>
-  <body>
-        <div><ol>
-                <br>
-                <br>
-                <br>
-                    <% results.forEach(function (result){ %> 
-                     <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
-                        <% }) %> 
-            </div></ol>
-        <div><ol>
-            <br>
-                <% results.forEach(function (result){ %> 
-                 <li> <%= result.description %></li>
-                    <% }) %> 
-            </div></ol>
-            
-                
-</html>
+<% include ./partials/_header %>
+
+<div><ol>
+<br>
+<br>
+<br>
+    <% results.forEach(function (result){ %>
+     <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
+        <% }) %>
+</div></ol>
+<div><ol>
+<br>
+<% results.forEach(function (result){ %>
+ <li> <%= result.description %></li>
+    <% }) %>
+</div></ol>
+
+<% include ./partials/_footer %>

@@ -20,17 +20,6 @@ module.exports = (knex, query) => {
 
   router.get("/", (req, res) => {
 
-    if (!req.session.userID) res.redirect('/login');
-
-    res.redirect('/index')
-
-  });
-
-
-  router.get("/index", (req, res) => {
-
-    if (!req.session.userID) res.redirect("/login");
-
     query.getRecentResources()
       .then( (results) => {
         res.render('index', {results});
@@ -56,12 +45,35 @@ module.exports = (knex, query) => {
 
   });
 
-
-  router.get("/profile", (req, res) => {
+  router.get("/user/:userID/resources", (req, res) => {
 
     if (!req.session.userID) res.redirect("/login");
 
-    query.getProfile(req.session.userID)
+    console.log(req.session.userID + "  " + req.params.userID);
+    if (req.params.userID !== req.session.userID.toString()) {
+      let templateVars = {
+        errCode: 403,
+        errMsg: 'Permission denied'
+      }
+      res.status(templateVars.errCode);
+      res.render('error', templateVars);
+
+    } else {
+
+      query.getMyResources(req.session.userID).then((results) => {
+        res.render('my-resources', results);
+      });
+
+    }
+
+  });
+
+
+  router.get("/user/:userid", (req, res) => {
+
+    if (!req.session.userID) res.redirect("/login");
+
+    query.getProfile(req.params.userid)
       .then(function (results) {
         res.render('profile', { results });
       })
@@ -69,28 +81,20 @@ module.exports = (knex, query) => {
   });
 
 
-  router.get("/myResources", (req, res) => {
-
-    if (!req.session.userID) res.redirect("/login");
-
-    query.getMyResources(req.session.userID).then((results) => {
-      res.render('myResources', results);
-    });
-
-  });
 
 
-  router.get('/searchResults', (req, res) => {
+
+  router.get('/search', (req, res) => {
     if (!req.session.userID) res.redirect("/login");
 
     if (req.query.name) {
       query.getUserResources(req.query.name).then((results) => {
         // console.log(results);
-        res.render('searchResults', { results })
+        res.render('search', { results })
       });
     } else if (req.query.topic) {
       query.getTopicResources(req.query.topic).then((results) => {
-        res.render('searchResults', { results });
+        res.render('search', { results });
       });
     } else {
       res.redirect("/");
@@ -111,6 +115,18 @@ module.exports = (knex, query) => {
     query.getResource(req.params.resourceID).then((results) => {
       res.render('resource', { results });
     })
+  });
+
+  router.get("/error", (req, res) => {
+
+    const templateVars = {
+      errCode: 404,
+      errMsg: "Couldn't find the requested document"
+    }
+
+    res.status(templateVars.errCode);
+    res.render("error", templateVars);
+
   });
 
 
