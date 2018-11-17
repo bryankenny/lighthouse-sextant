@@ -8,5 +8,30 @@
 
 </head>
   <body>
+    <table>
+      <tr>
+    <form method=POST action='/resource/:resourceID/like'>
+        <button type="submit" name=liked style='margin-top: 5em'>like</button>
+    
+    </form>
+
+    <form method=POST action='/resource/:resourceID/rate'>
+      <select type='submit'    name="rating">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+
+        </select>
+    </form>
+
+      <form method=POST action='/resource/:resourceID/comment'>
+        <textarea name=comment style='margin-top: 5em'>add comment</textarea>
+        <button type="submit">Submit Comment</button>
+      </form>
+    </tr>
+    </table>
+
   </body>
 </html>
