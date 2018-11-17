@@ -172,10 +172,10 @@ module.exports = (knex, query) => {
 
 
   router.post('/index', (req, res) => {
-    const id = req.session.userID;
+    const userID = req.session.userID;
     const body = req.body;
 
-    query.newResource(id, body).then(function () {
+    query.newResource(userID, body).then(function () {
       res.redirect('/')
     })
 
