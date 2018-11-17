@@ -9,26 +9,19 @@
 </head>
   <body>
         <div><ol>
-            <br>
-            <br>
-            <br>
-                <% results.forEach(function (result){ %> 
-                 <li> <%= result.url %> </li>
-                    <% }) %> 
-        </div></ol>
+                <br>
+                <br>
+                <br>
+                    <% results.forEach(function (result){ %> 
+                     <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
+                        <% }) %> 
+            </div></ol>
         <div><ol>
             <br>
                 <% results.forEach(function (result){ %> 
                  <li> <%= result.description %></li>
                     <% }) %> 
             </div></ol>
-            <div><ol>
-                    <br>
-                    <br>
-                    <br><a href = "
-                    <% results.forEach(function (result){ %> 
-                        <li> <%= result.url %>" </li>
-                           <% }) %> </li>
-                </div></ol>
+            
                 
 </html>
