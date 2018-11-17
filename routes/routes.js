@@ -3,6 +3,10 @@
 const express = require('express');
 const router = express.Router();
 
+function compileTemplateVars(req, results) {
+  return {results, userID: req.session.userID, userName: req.session.userName};
+}
+
 module.exports = (knex, query) => {
 
   // Requirements:
@@ -131,6 +135,7 @@ module.exports = (knex, query) => {
       query.registerUser(req.body.name)
         .then((results) => {
           req.session.userID = results[0].id;
+          req.session.userName = results[0].name;
           res.redirect('/')
         })
         .catch(function (error) {
@@ -153,6 +158,7 @@ module.exports = (knex, query) => {
     query.login(name)
       .then(function (results) {
         req.session.userID = results[0].id;
+        req.session.userName = results[0].name;
         res.redirect('/')
       })
       .catch(function (error) {

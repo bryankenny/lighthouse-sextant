@@ -90,7 +90,7 @@ module.exports = (knex) => {
 
     return knex('users')
       .insert({ name: name })
-      .returning(['id'])
+      .returning(['id', 'name'])
       .then((results) => results);
 
   }
@@ -99,7 +99,7 @@ module.exports = (knex) => {
 
     return knex('users')
       .where({ 'users.name': name })
-      .select('id')
+      .select('id', 'name')
       .then((results) => results);
 
   }
