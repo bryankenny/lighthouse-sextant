@@ -7,7 +7,7 @@ module.exports = (knex) => {
     return knex('users')
       .where({ id: id })
       .select('name')
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
@@ -73,7 +73,7 @@ module.exports = (knex) => {
       .where({ 'days.day': day })
       .select("resources.*", "topics.id AS topic_id", "users.name AS user_name")
       .orderBy("topics.name")
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
@@ -82,7 +82,7 @@ module.exports = (knex) => {
     return knex('resources')
       .where({ 'resources.id': resourceID })
       .select("*")
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
@@ -91,7 +91,7 @@ module.exports = (knex) => {
     return knex('users')
       .insert({ name: name })
       .returning(['id'])
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
@@ -100,7 +100,7 @@ module.exports = (knex) => {
     return knex('users')
       .where({ 'users.name': name })
       .select('id')
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
@@ -114,7 +114,7 @@ module.exports = (knex) => {
     knex('resources')
       .insert({ url: url, title: title, description: description, topic_id: topic, owner_id: id })
       .returning("id")
-      .then((result) => result);
+      .then((results) => results);
 
 
   };
@@ -124,7 +124,7 @@ module.exports = (knex) => {
     return knex('reactions')
       .where({ 'resource_id': resource_id })
       .update({ 'user_id': user_id, 'resource_id': resource_id, 'liked': true })
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
@@ -133,7 +133,7 @@ module.exports = (knex) => {
     return knex('reactions')
       .where({ 'resource_id': resource_id })
       .update({ 'user_id': user_id, 'resource_id': resource_id, 'rating': rating })
-      .then((result) => result);
+      .then((results) => results);
 
     }
 
@@ -142,7 +142,7 @@ module.exports = (knex) => {
     return knex('comments')
       .where({ 'resource_id': resource_id })
       .insert({ 'user_id': user_id, 'resource_id': resource_id, 'text': comment })
-      .then((result) => result);
+      .then((results) => results);
 
   }
 
