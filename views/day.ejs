@@ -8,8 +8,12 @@
     
 </head>
   <body>
-    <% for (let r in result){ %>
-    <%= result[r].id %>
-    <% } %>
+        <div>
+            <br>
+            <br>
+                <% results.forEach(function (result){ %>
+                 <div>   <%= result.day %></div>
+                    <% }) %> 
+        </div>
   </body>
 </html>

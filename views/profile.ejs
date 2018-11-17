@@ -21,17 +21,17 @@
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
-                                <!-- <div class="image-container">
+                                <div class="image-container">
                                     <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     <div class="middle">
                                         <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
                                         <input type="file" style="display: none;" id="profilePicture" name="file" />
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">
-                                        <% for (let r in result){ %>
-                                        <%= result[r].name; %>
+                                        <% for (let r in results){ %>
+                                        <%= results[r].name; %>
                                         <% } %></a></h2>
                                     <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Reference's Uploaded</h6>
                                     <h6 class="d-block"><a href="javascript:void(0)">300</a> Likes</h6>
@@ -61,8 +61,8 @@
                                                 <label style="font-weight:bold;">Username</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                    <% for (let r in result){ %>
-                                                        <%= result[r].name %>
+                                                    <% for (let r in results){ %>
+                                                        <%= results[r].name %>
                                                         <% } %>
                                             </div>
                                         </div>
