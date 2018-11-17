@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <header>
-    <% include ./partials/_header %>
-  </header>
-  <link rel="stylesheet" href="/styles/table.css"/>
-  <head>
+<% include ./partials/_header %>
 
-</head>
-  <body>
-        <div>
-            <br>
-            <br>
-            <br>
-                <% results.forEach(function (result){ %>
-<<<<<<< HEAD
-                 <div>   <%= result.url %></div>
-                    <% }) %> 
-=======
-                 <div>   <%= JSON.stringify(result, null, 2) %></div>
-                    <% }) %>
->>>>>>> Prep for refactoring views
-        </div>
-  </body>
-</html>
+<div><ol>
+<br>
+<br>
+<br>
+    <% results.forEach(function (result){ %>
+     <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
+        <% }) %>
+</div></ol>
+<div><ol>
+<br>
+<% results.forEach(function (result){ %>
+ <li> <%= result.description %></li>
+    <% }) %>
+</div></ol>
+
+<% include ./partials/_footer %>
