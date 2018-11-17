@@ -95,7 +95,7 @@
                         <small></small>
                     </h1>
                     <h5>
-                        
+
                     </h5>
                     <hr/>
                     <table class="side-schedule table table-bordered table-sm table-rounded">
@@ -356,7 +356,7 @@
                         <a class="btn btn-secondary dismiss">Dismiss</a>
                     </div>
                     <div class="schedule-heading clearfix">
-                        <h1 class="pull-left">Schedule</h1>
+                        <h1 class="pull-left">Student Resources</h1>
                     </div>
                     <div class="pinnednote   activity">
                         <div class="icon icon-type" title="PinnedNote">
@@ -366,15 +366,14 @@
                             <br/>
                             Note<br/>
                         </div>
-                        <div class="name">Lighthouse Labs Resource Wall</div>
+                        <div class="name">Recently Added</div>
                     </div>
                     <div class="pinned-content">
                         <div class="instructions">
                             <ul>
-                              <li>Recent</li>
-                              <li>Resources</li>
-                              <li>Will Go</li>
-                              <li>Here With a Comment Box</li>
+                              <% for (let i in results) { %>
+                                <li><%= results[i].url %> - <%= results[i].title %></li>
+                              <% } %>
                             </ul>
                         </div>
                     </div>
@@ -399,85 +398,6 @@
                         </div>
                     </div>
                     <h3></h3>
-
-                    <!-- <h3>Lectures &Breakouts</h3>
-                    <a class="lectureplan   activity" href="/days/w04d3/activities/352">
-                        <div class="icon icon-type" title="LecturePlan">
-                            <i class="fa fa-group"></i>
-                        </div>
-                        <div class="time">
-                            10:00<br/>
-                            to<br/>12:00
-                        </div>
-                        <div class="name">Project Kickoff &nbsp;</div>
-                    </a>
-                    <h3>Work Activities</h3>
-                    <a class="task   activity" href="/days/w04d3/activities/353">
-                        <div class="icon icon-type" title="Task">
-                            <i class="fa fa-flash"></i>
-                        </div>
-                        <div class="time time-duration">
-                            <br>
-                            15m<br>
-                        </div>
-                        <div class="icon icon-completion">
-                            <i class="fa fa-square-o"></i>
-                        </div>
-                        <div class="name">Setup Local PG Database &nbsp;</div>
-                    </a>
-                    <a class="task   activity" href="/days/w04d3/activities/354">
-                        <div class="icon icon-type" title="Task">
-                            <i class="fa fa-flash"></i>
-                        </div>
-                        <div class="time time-duration">
-                            <br>
-                            30m<br>
-                        </div>
-                        <div class="icon icon-completion">
-                            <i class="fa fa-check-square-o"></i>
-                        </div>
-                        <div class="name">Setup Git Repo &nbsp;</div>
-                    </a>
-                    <div class="row mt-5">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h2>Daily Feedback</h2>
-                                    <form class="" id="new_day_feedback" action="/days/w04d3/feedbacks" accept-charset="UTF-8" method="post">
-                                        <input name="utf8" type="hidden" value="&#x2713;"/>
-                                        <input type="hidden" name="authenticity_token" value="jd0C/ScXmmT5AHXIaVot68PWsqlWuckcziOwx02s8aUwnurqcbUlt95wovQlprEGPKVEnCDKRaHzFjR1SpyQZg=="/>
-                                        <fieldset>
-                                            <p>
-                                                <small>Use this form to provide your overall sentiment about TODAY. Neither curriculum-specific nor teacher-specific feedback should be placed here. Think instead about how today went as a whole in terms of the experience (the mood, the energy, the space, mentor support and availability, the space itself, etc).</small>
-                                            </p>
-                                            <only></only>
-                                            <div class="form-group">
-                                                <label class="face" for="day_feedback_mood_happy">
-                                                    <input type="radio" value="happy" name="day_feedback[mood]" id="day_feedback_mood_happy"/>
-                                                    <i class="fa fa-smile-o fa-5x"></i>
-                                                </label>
-                                                <label class="face" for="day_feedback_mood_ok">
-                                                    <input type="radio" value="ok" name="day_feedback[mood]" id="day_feedback_mood_ok"/>
-                                                    <i class="fa fa-circle-thin fa-5x"></i>
-                                                </label>
-                                                <label class="face" for="day_feedback_mood_sad">
-                                                    <input type="radio" value="sad" name="day_feedback[mood]" id="day_feedback_mood_sad"/>
-                                                    <i class="fa fa-frown-o fa-5x"></i>
-                                                </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <input placeholder="Title (optional)" class="form-control" type="text" name="day_feedback[title]" id="day_feedback_title"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea placeholder="Details about your sentiment here (required)" class="form-control" name="day_feedback[text]" id="day_feedback_text" cols="24" rows="6"></textarea>
-                                            </div>
-                                            <div align="left">
-                                                <div class="actions">
-                                                    <input type="submit" name="commit" value="Submit Feedback" class="btn btn-danger btn-lg" data-disable-with="Submit Feedback"/>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </form> -->
                                 </div>
                             </div>
                         </div>

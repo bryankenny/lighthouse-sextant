@@ -25,8 +25,16 @@ module.exports = (knex, query) => {
     }
   });
   router.get("/index", (req, res) => {
-    res.render('index')
-  })
+    if (req.session.userID) {
+      query.getRecentResources()
+        .then( (results) => {
+          console.log(JSON.stringify(results, null, 2));
+          res.render('index', {results});
+        })
+    } else {
+      res.redirect("/login");
+    }
+  });
   router.get("/register", (req, res) => {
     if (req.session.userID) {
       res.redirect('/');
