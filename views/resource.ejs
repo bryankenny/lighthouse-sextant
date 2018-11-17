@@ -21,7 +21,7 @@
     </form>
 
     <form method=POST action='/resource/:resourceID/rate'>
-      <select type='submit'    name="rating">
+      <select type='submit'  onchange="this.form.submit()"  name="rating">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
