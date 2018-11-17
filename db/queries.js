@@ -62,14 +62,16 @@ module.exports = (knex) => {
 
   };
 
-  queries.getDay = function (day) {
+  queries.getDayResources = function (day) {
 
     return knex('days')
       .join('days_topics', 'days.id', 'days_topics.day_id')
       .join('topics', 'days_topics.topic_id', 'topics.id')
       .join('resources_topics', 'topics.id', 'resources_topics.topic_id')
+      .join("resources", "resources_topics.resource_id", "resources.id")
+      .join("users", "resources.user_id", "users.id")
       .where({ 'days.day': day })
-      .select("*")
+      .select("resources.*", "topics.id AS topic_id", "users.name AS user_name")
       .orderBy("topics.name")
       .then((result) => result);
 

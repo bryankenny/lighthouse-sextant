@@ -100,7 +100,7 @@ module.exports = (knex, query) => {
 
 
   router.get("/day/:day", (req, res) => {
-    query.getDay(req.params.day).then((results) => {
+    query.getDayResources(req.params.day).then((results) => {
       console.log(results);
       res.render('day', { results });
     })
