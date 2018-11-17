@@ -8,20 +8,33 @@
     
 </head>
   <body>
-        <div>
+        <div><ol>
             <br>
             <br>
             <br>
-                <% results.forEach(function (result){ %>
-                 <div>   <%= result.url %></div>
-                    <% }) %> 
-        </div>
-        <div>
+                <% results.forEach(function (result){ %> 
+                 <li> <%= result.url %> </li>
+                    <% }) %> </li>
+        </div></ol>
+        <div><ol>
+            <br>
+                <% results.forEach(function (result){ %> 
+                 <li> <%= result.description %></li>
+                    <% }) %> </li>
+            </div></ol>
+            <div><ol>
+                    <br>
+                    <br>
+                    <br><a href = "
+                    <% results.forEach(function (result){ %> 
+                        <li> <%= result.url %>" </li>
+                           <% }) %> </li>
+                </div></ol>
+                <div><ol>
+                        <br>
+                            <% results.forEach(function (result){ %> 
+                             <li> <%= result.description %></li>
+                                <% }) %> </li>
+                        </div></ol>
                 
-                <br>
-                    <% results.forEach(function (result){ %>
-                     <div>   <%= result.description %></div>
-                        <% }) %> 
-            </div>
-  </body>
 </html>
