@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <header>
-    <title>Registration</title>
-    <link rel="stylesheet" href="/styles/table.css"/>
-  </header>
-  <% include ./partials/_header %>
-  <body>
-    <head>
-    </head>
-    <br>
-    <br>
-    <br>
-    <h1 style="font-family:sans-serif;" style="padding-top:100px;""><u>Register</u></h1>
-   <form action="/register" method="POST">
-     <table style="margin:30px;">
-       <tr style="height:60px;">
-         <td style="font-family:cursive;"><label for="email"></label>Username:</label></td>
-         <td style="width:250px;"><input id="name" name="name" type="name" style="width:200px;"></td>
-       </tr>
-       <!-- <tr>
-         <td style="font-family:cursive;"><label for="password">Password:</label></td>
-         <td><input id="password" name="password" type="password" style="width:200px;"></td>
-       </tr> -->
-     </table>
-     <button style="margin-left: 277px;">Register  <img src="https://cdn0.iconfinder.com/data/icons/cosmetic-store/25/Register-512.png" width="20" height="20"></button>
+<% include ./partials/_header %>
+
+<div class="pinnednote activity">
+    <div class="name">Register</div>
+</div>
+<div class="pinned-content">
+  <div class="instructions">
+
+  <form action="/register" method="POST">
+
+        <table>
+          <tr>
+            <td><label for="username">Username:</label></td>
+            <td><input name="name"></td>
+          </tr>
+        </table>
+        <button>Register<img src="https://image.flaticon.com/icons/svg/248/248927.svg" width="20" height="20"></button>
+
     </form>
-  </body>
-</html>
+  </div>
+</div>
+
+<% include ./partials/_footer %>
