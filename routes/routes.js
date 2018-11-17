@@ -17,91 +17,107 @@ module.exports = (knex, query) => {
 
   // GETS -------------------------------------------------------------------------
 
+
   router.get("/", (req, res) => {
-    if (req.session.userID) {
-      res.redirect('/index');
-    } else {
-      res.redirect('/login');
-    }
+
+    if (!req.session.userID) res.redirect('/login');
+
+    res.redirect('/index')
+
   });
+
+
   router.get("/index", (req, res) => {
-    if (req.session.userID) {
-      query.getRecentResources()
-        .then( (results) => {
-          console.log(JSON.stringify(results, null, 2));
-          res.render('index', {results});
-        })
-    } else {
-      res.redirect("/login");
-    }
+
+    if (!req.session.userID) res.redirect("/login");
+
+    query.getRecentResources()
+      .then( (results) => {
+        res.render('index', {results});
+      })
+
   });
+
+
   router.get("/register", (req, res) => {
-    if (req.session.userID) {
-      res.redirect('/');
-    } else {
-      res.render('register');
-    }
+
+    if (req.session.userID) res.redirect("/index");
+
+    res.render('register');
+
   });
+
+
   router.get("/login", (req, res) => {
-    if (req.session.userID) {
-      res.redirect('/');
-    } else {
-      res.render('login');
-    }
+
+    if (req.session.userID) res.redirect("/index");
+
+    res.render('login');
+
   });
+
+
   router.get("/profile", (req, res) => {
-    if (req.session.userID) {
-      query.getProfile(req.session.userID)
-        .then(function (result) {
-          res.render('profile', { result });
-        })
-    } else {
-      res.redirect('/');
-    }
+
+    if (!req.session.userID) res.redirect("/login");
+
+    query.getProfile(req.session.userID)
+      .then(function (results) {
+        res.render('profile', { results });
+      })
+
   });
+
+
   router.get("/myResources", (req, res) => {
-    if (req.session.userID) {
-      query.getMyResources(req.session.userID).then((results) => {
-        res.render('myResources', results);
+
+    if (!req.session.userID) res.redirect("/login");
+
+    query.getMyResources(req.session.userID).then((results) => {
+      res.render('myResources', results);
+    });
+
+  });
+
+
+  router.get('/searchResults', (req, res) => {
+    if (!req.session.userID) res.redirect("/login");
+
+    if (req.query.name) {
+      query.getUserResources(req.query.name).then((results) => {
+        // console.log(results);
+        res.render('searchResults', { results })
+      });
+    } else if (req.query.topic) {
+      query.getTopicResources(req.query.topic).then((results) => {
+        res.render('searchResults', { results });
       });
     } else {
-      res.redirect('/');
+      res.redirect("/");
     }
-  });
-  router.get('/searchResults', (req, res) => {
-    if (req.session.userID) {
-      if (req.query.name) {
-        query.getUserResources(req.query.name).then((results) => {
-          // console.log(results);
-          res.render('searchResults', { results })
-        });
-      } else if (req.query.topic) {
-        query.getTopicResources(req.query.topic).then((results) => {
-          res.render('searchResults', { results });
-        });
-      } else {
-        res.redirect("/");
-      }
-    } else {
-      res.redirect('/')
-    }
+
   })
+
+
   router.get("/day/:day", (req, res) => {
-    query.getDay(req.params.day).then((result) => {
-      res.render('day', { result });
+    query.getDay(req.params.day).then((results) => {
+      res.render('day', { results });
     })
   });
+
+
   router.get("/resource/:resourceID", (req, res) => {
-    query.getResource(req.params.resourceID).then((result) => {
-      res.render('resource', { result });
+    query.getResource(req.params.resourceID).then((results) => {
+      res.render('resource', { results });
     })
   });
+
 
   // POSTS -----------------------------------------------------------------------
 
   router.post('/register', (req, res) => {
     const name = req.body.name
-    console.log(name)
+
     if (!name) {
       const templateVars = {
         errCode: 400,
@@ -109,12 +125,13 @@ module.exports = (knex, query) => {
       }
       res.status(400);
       res.render('error', templateVars);
-    }
-    else {
-      query.registerUser(req.body.name).then((result) => {
-        req.session.userID = result[0].id;
-        res.redirect('index')
-      })
+    } else {
+
+      query.registerUser(req.body.name)
+        .then((results) => {
+          req.session.userID = results[0].id;
+          res.redirect('/index')
+        })
         .catch(function (error) {
           let templateVars = {
             errCode: 401,
@@ -123,14 +140,20 @@ module.exports = (knex, query) => {
           res.status(401);
           res.render('error', templateVars);
         })
+
     }
+
   });
+
+
   router.post('/login', (req, res) => {
     const name = req.body.name
-    query.login(name).then(function (result) {
-      req.session.userID = result[0].id;
-      res.render('index')
-    })
+
+    query.login(name)
+      .then(function (results) {
+        req.session.userID = results[0].id;
+        res.redirect('/index')
+      })
       .catch(function (error) {
         let templateVars = {
           errCode: 401,
@@ -140,73 +163,69 @@ module.exports = (knex, query) => {
         res.render('error', templateVars);
       })
   });
+
+
   router.post('/logout', (req, res) => {
     req.session = null;
     res.redirect('/');
   });
+
+
   router.post('/index', (req, res) => {
     const id = req.session.userID;
     const body = req.body;
+
     query.newResource(id, body).then(function () {
       res.redirect('/')
     })
-  });
-  router.post('/resource/:resourceID/like', (req, res) => {
-    if (req.session.userID) {
-      const user_id = req.session.userID;
-      const resource_id = req.params.resourceID;
 
-      query.like(user_id, resource_id).then(function (result) {
+  });
+
+
+  router.post('/resource/:resourceID/like', (req, res) => {
+
+    if (!req.session.userID) res.redirect("/login");
+
+    const user_id = req.session.userID;
+    const resource_id = req.params.resourceID;
+
+    query.like(user_id, resource_id).then(function (results) {
+      res.redirect('/');
+    })
+
+  });
+
+
+  router.post('/resource/:resourceID/rate', (req, res) => {
+
+    if (!req.session.userID) res.redirect("/login");
+
+    const user_id = req.session.userID;
+    const resource_id = req.params.resourceID;
+    const rating = req.body.rating;
+
+    query.rate(user_id, resource_id, rating)
+      .then(function (results) {
         res.redirect('/');
       })
-    }
-    else {
-      let templateVars = {
-        errCode: 401,
-        errMsg: 'Login first'
-      }
-      res.status(401);
-      res.render('error', templateVars);
-    }
+
   });
-  router.post('/resource/:resourceID/rate', (req, res) => {
-    if (req.session.userID) {
-      const user_id = req.session.userID;
-      const resource_id = req.params.resourceID;
-      const rating = req.body.rating;
-      query.rate(user_id, resource_id, rating)
-        .then(function (result) {
-          res.redirect('/');
-        })
-    }
-    else {
-      let templateVars = {
-        errCode: 401,
-        errMsg: 'Login first'
-      }
-      res.status(401);
-      res.render('error', templateVars);
-    }
-  });
+
+
   router.post('/resource/:resourceID/comment', (req, res) => {
-    if (req.session.userID) {
-      const user_id = req.session.userID;
-      const resource_id = req.params.resourceID;
-      const comment = req.body.comment;
-      query.comment(user_id, resource_id, comment)
-        .then(function (result) {
-          res.redirect('/');
-        })
-    }
-    else {
-      let templateVars = {
-        errCode: 401,
-        errMsg: 'Login first'
-      }
-      res.status(401);
-      res.render('error', templateVars);
-    }
+
+    if (!req.session.userID) res.redirect("/login");
+
+    const user_id = req.session.userID;
+    const resource_id = req.params.resourceID;
+    const comment = req.body.comment;
+    query.comment(user_id, resource_id, comment)
+      .then(function (results) {
+        res.redirect('/');
+      })
+
   });
+
 
   return router;
 
