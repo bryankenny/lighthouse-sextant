@@ -21,70 +21,9 @@
                                 </div>
                             </div>
                         </div>
-<!-- 
-                        <div class="row">
-                            <div class="col-12">
-                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="/my-resources" role="tab" aria-controls="connectedServices" aria-selected="false">My Resources</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content ml-1" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
 
-
-                                        <div class="row">
-                                           
-                                            <div class="col-md-8 col-6">
-                                                    <% for (let r in results){ %>
-                                                        <%= results[r].name %>
-                                                        <% } %>
-                                            </div>
-                                        </div>
-                                        <hr />
-
-
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                Something
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                Something
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">Something</label>
-                                            </div>
-                                            <div class="col-md-8 col-6">
-                                                Something
-                                            </div>
-                                        </div>
-                                        <hr />
-
-                                    </div>
-                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                        Facebook, Google, Twitter Account that are connected to this account
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                         
                         
-                           
 <h5 class="card-header" id="feedback-form">Submit Resource</h5>
 <div class="card-body">
         <form id="formInput" novalidate="novalidate"  action="/my-resources" accept-charset="UTF-8" data-remote="true" method="post">
@@ -121,13 +60,33 @@
     </div>
 </div>
 </div> 
-
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="pinnednote activity">
+        <div class="name"><%= results[0].title %></div>
+      </div>
+      <div class="pinned-content">
+        <p><%= results[0].description %></p>
+      
+        <form method=POST action='/resource/:resourceID/like'>
+            <button type="submit" name=liked>like</button>
+      
+        </form>
+      
+        <form method=POST action='/resource/:resourceID/rate'>
+          <select type='submit' onchange="this.form.submit()"  name="rating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+      
+            </select>
+        </form>
+      
+        <form method=POST action='/resource/:resourceID/comment'>
+          <textarea name="comment">add comment</textarea>
+          <button type="submit">Submit Comment</button>
+        </form>
+      
+      </div>
 
 <% include ./partials/_footer %>
