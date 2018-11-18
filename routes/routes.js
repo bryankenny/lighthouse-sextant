@@ -47,7 +47,7 @@ module.exports = (knex, query) => {
 
     if (req.session.userID) res.redirect("/");
 
-    res.render('register', compileTemplateVars(req, results));
+    res.render('register');
 
   });
 
@@ -56,7 +56,7 @@ module.exports = (knex, query) => {
 
     if (req.session.userID) res.redirect("/");
 
-    res.render('login', compileTemplateVars(req, results));
+    res.render('login');
 
   });
 
