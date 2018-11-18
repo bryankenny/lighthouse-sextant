@@ -76,9 +76,10 @@ module.exports = (knex, query) => {
   router.get("/my-resources", (req, res) => {
 
     if (!req.session.userID) res.redirect("/login");
-
+    // console.log("GET my-resources");
     query.getMyResources(req.session.userID).then((results) => {
-      res.render('my-resources', compileTemplateVars(req, results));
+      const resources = results.mine
+      res.render('my-resources', compileTemplateVars(req, resources));
     });
 
   });
@@ -105,7 +106,6 @@ module.exports = (knex, query) => {
 
   router.get("/day/:day", (req, res) => {
     query.getDayResources(req.params.day).then((results) => {
-      console.log(results);
       res.render('day', compileTemplateVars(req, results));
     })
   });
@@ -193,7 +193,7 @@ module.exports = (knex, query) => {
     const userID = req.session.userID;
     const body = req.body;
 
-    const resourceBody = {
+     const resourceBody = {
       url: body.resource_url,
       title: body.resource_topic,
       description: body.resource_description,
@@ -206,6 +206,7 @@ module.exports = (knex, query) => {
       res.status(500).json({error: error.message});
     })
   });
+
 
 
 
