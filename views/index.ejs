@@ -1,31 +1,37 @@
 <% include ./partials/_header %>
 
 <h3>Recently Added</h3>
-
+<!-- 
 <div class="pinnednote   activity">
     <div class="name">Add A Resource</div>
 </div>
 
 <div class="pinned-content">
     <div class="instructions">
-     <form action="/new-resources" method="POST">
-        Add a Resource:<br>
+     <form action="/new-resource" method="POST">
+        Save a Resource:<br>
         <input type="text" name="URL" value="Resource URL Here">
         <br><br>
         <input type="submit" value="Submit">
       </form> 
     </div>
-</div>
+</div>  -->
 
 <div class="pinnednote   activity">
-        <div class="name">Save A Resource</div>
+        <div class="name">Add A Resource</div>
     </div>
     
     <div class="pinned-content">
         <div class="instructions">
          <form action="/my-resources" method="POST">
             Save a Resource:<br>
-            <input type="text" name="URL" value="Resource URL Here">
+            <input type="text" name="URL" placeholder="Resource URL ">
+            <br><br>
+            <input type="submit" value="Submit"><br><br>
+            <input type="text" name="URL" placeholder="Resource Topic">
+            <br><br>
+            <input type="submit" value="Submit"><br><br>
+            <input type="text" name="URL" placeholder="Resource Description">
             <br><br>
             <input type="submit" value="Submit">
           </form> 
