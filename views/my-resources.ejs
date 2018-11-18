@@ -8,30 +8,12 @@
           <br>
           <% results.forEach(function (result){ %>
             <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
+             <%= result.description + " - " + "Topic: " + result.title %> 
                <% }) %>
       </div></ol>
   </ul>
 </div>
-<div class="container">
-    <ul>
-        <div><ol>
-            <br>
-            <% results.forEach(function (result){ %>
-              <li> <%= result.description %> </li>
-                 <% }) %>
-        </div></ol>
-    </ul>
-  </div>
-  <div class="container">
-      <ul>
-          <div><ol>
-              <br>
-              <% results.forEach(function (result){ %>
-                <li> <%= result.title %> </li>
-                   <% }) %>
-          </div></ol>
-      </ul>
-    </div>
+
 
 
 
