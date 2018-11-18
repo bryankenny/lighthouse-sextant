@@ -7,30 +7,32 @@
     
                             <h5 class="card-header" id="feedback-form">Submit Resource</h5>
                             <div class="card-body">
-                                    <form novalidate="novalidate" class="simple_form new_activity_feedback" id="new_activity_feedback" action="/new-resource" accept-charset="UTF-8" data-remote="true" method="post">
+                                    <form novalidate="novalidate" class="simple_form new_activity_feedback" id="new_activity_feedback" action="/my-resources" accept-charset="UTF-8" data-remote="true" method="post">
                                         <input name="utf8" type="hidden" value="&#x2713;"/>
-                                        <label class="string optional" for="activity_feedback_Rate this activity overall (optional)">Submit a New Resource</label>
                                         <div>
                                             <div class="raty-editor" name="feedback[rating]">
-                                                <input type="hidden" name="activity_feedback[rating]" id="activity_feedback_rating"/>
+                                                <input type="hidden" name="submit_url" id="activity_feedback_rating"/>
                                             </div>
                                             <div class="hint"></div>
                                         </div>
                                         <div class="form-group text optional activity_feedback_detail">
                                             <label class="control-label text optional" for="activity_feedback_detail">Resource URL</label>
                                             <div>
+                                                <input type="hidden" name="resource_url" id="formInput"/>
                                                 <textarea class="form-control text optional" placeholder="Resurce URL Goes Here" name="activity_feedback[detail]" id="activity_feedback_detail"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group text optional activity_feedback_detail">
                                                 <label class="control-label text optional" for="activity_feedback_detail">Topic</label>
                                                 <div>
+                                                        <input type="hidden" name="resource_topic" id="formInput"/>
                                                     <textarea class="form-control text optional" placeholder="Javascript, HTML, JQuery, etc..." name="activity_feedback[detail]" id="activity_feedback_detail"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group text optional activity_feedback_detail">
                                                     <label class="control-label text optional" for="activity_feedback_detail">Description</label>
                                                     <div>
+                                                        <input type="hidden" name="resource_description" id="formInput"/>
                                                         <textarea class="form-control text optional" placeholder="A Short Description of The Resource Being Added" name="activity_feedback[detail]" id="activity_feedback_detail"></textarea>
                                                     </div>
                                                 </div>

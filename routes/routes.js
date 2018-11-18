@@ -188,6 +188,16 @@ module.exports = (knex, query) => {
 
   });
 
+  router.post('/my-resources', (req, res) => {
+    const userID = req.session.userID;
+    const body = req.body;
+
+    query.getMyResources(req.session.userID).then((results) => {
+      res.render('my-resources', compileTemplateVars(req, results));
+    });
+
+  });
+
 
   router.post('/resource/:resourceID/like', (req, res) => {
 

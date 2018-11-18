@@ -4,9 +4,13 @@
 
 <div class="container">
   <ul>
-    <% for (let x in liked){ %>
-      <li><%= liked[x].title %></li>
-    <% } %>
+    <script>
+      document.getElementById("myInput").addEventListener("input", myFunction);
+
+function myFunction() {
+    alert("The value of the input field was changed.");
+}  
+    </script>
   </ul>
   <ul></ul>
 </div>
