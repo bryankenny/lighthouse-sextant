@@ -169,6 +169,7 @@ module.exports = (knex, query) => {
         res.status(401);
         res.render('error', templateVars);
       })
+      console.log(req.body.name);
   });
 
 
@@ -192,11 +193,21 @@ module.exports = (knex, query) => {
     const userID = req.session.userID;
     const body = req.body;
 
-    query.getMyResources(req.session.userID).then((results) => {
-      res.render('my-resources', compileTemplateVars(req, results));
-    });
-
+    const resourceBody = {
+      url: body.resource_url,
+      title: body.resource_topic,
+      description: body.resource_description,
+      user_id: userID
+    }
+    console.log('resourceBody', resourceBody)
+    knex('resources').insert(resourceBody).then((data) => {
+      res.redirect('my-resources');
+    }).catch((error) => {
+      res.status(500).json({error: error.message});
+    })
   });
+
+
 
 
   router.post('/resource/:resourceID/like', (req, res) => {
