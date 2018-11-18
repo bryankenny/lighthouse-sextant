@@ -73,12 +73,12 @@ module.exports = (knex, query) => {
   });
 
 
-  router.get("/myResources", (req, res) => {
+  router.get("/my-resources", (req, res) => {
 
     if (!req.session.userID) res.redirect("/login");
 
     query.getMyResources(req.session.userID).then((results) => {
-      res.render('myResources', results);
+      res.render('my-resources', results);
     });
 
   });
