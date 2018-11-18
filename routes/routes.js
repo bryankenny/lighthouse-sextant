@@ -37,7 +37,7 @@ module.exports = (knex, query) => {
 
     query.getRecentResources()
       .then( (results) => {
-        res.render('index', {results});
+        res.render('index', compileTemplateVars(req, results));
       })
 
   });
@@ -47,7 +47,7 @@ module.exports = (knex, query) => {
 
     if (req.session.userID) res.redirect("/");
 
-    res.render('register');
+    res.render('register', compileTemplateVars(req, results));
 
   });
 
@@ -56,7 +56,7 @@ module.exports = (knex, query) => {
 
     if (req.session.userID) res.redirect("/");
 
-    res.render('login');
+    res.render('login', compileTemplateVars(req, results)););
 
   });
 
@@ -67,7 +67,7 @@ module.exports = (knex, query) => {
 
     query.getProfile(req.session.userID)
       .then(function (results) {
-        res.render('profile', { results });
+        res.render('profile', compileTemplateVars(req, results));
       })
 
   });
@@ -78,7 +78,7 @@ module.exports = (knex, query) => {
     if (!req.session.userID) res.redirect("/login");
 
     query.getMyResources(req.session.userID).then((results) => {
-      res.render('my-resources', results);
+      res.render('my-resources', compileTemplateVars(req, results));
     });
 
   });
@@ -90,11 +90,11 @@ module.exports = (knex, query) => {
     if (req.query.name) {
       query.getUserResources(req.query.name).then((results) => {
         // console.log(results);
-        res.render('searchResults', { results })
+        res.render('searchResults', compileTemplateVars(req, results));
       });
     } else if (req.query.topic) {
       query.getTopicResources(req.query.topic).then((results) => {
-        res.render('searchResults', { results });
+        res.render('searchResults', compileTemplateVars(req, results));
       });
     } else {
       res.redirect("/");
@@ -106,14 +106,14 @@ module.exports = (knex, query) => {
   router.get("/day/:day", (req, res) => {
     query.getDayResources(req.params.day).then((results) => {
       console.log(results);
-      res.render('day', { results });
+      res.render('day', compileTemplateVars(req, results));
     })
   });
 
 
   router.get("/resource/:resourceID", (req, res) => {
     query.getResource(req.params.resourceID).then((results) => {
-      res.render('resource', { results });
+      res.render('resource', compileTemplateVars(req, results));
     })
   });
 
