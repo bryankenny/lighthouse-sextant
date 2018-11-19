@@ -119,21 +119,49 @@ module.exports = (knex) => {
 
   };
 
-  queries.like = function (user_id, resource_id) {
+  queries.getReaction = function (user_id, resource_id) {
 
-    return knex('reactions')
-      .where({ 'resource_id': resource_id })
-      .update({ 'user_id': user_id, 'resource_id': resource_id, 'liked': true })
+    return knex("reactions")
+      .where({"resource_id": resource_id, "user_id": user_id})
       .then((results) => results);
+
+  }
+
+  queries.toggleLike = function (user_id, resource_id) {
+
+    return queries.getReaction(user_id, resource_id).then((results) => {
+
+      if (results[0]) {
+        knex('reactions')
+        .where({ 'resource_id': resource_id, "user_id": user_id })
+        .update({ 'liked': !results[0].liked })
+        .then((results) => results);
+      } else {
+        knex('reactions')
+        .insert({ 'user_id': user_id, 'resource_id': resource_id, 'liked': "true" })
+        .then((results) => results);
+      }
+
+    });
 
   }
 
   queries.rate = function (user_id, resource_id, rating) {
 
-    return knex('reactions')
-      .where({ 'resource_id': resource_id })
-      .update({ 'user_id': user_id, 'resource_id': resource_id, 'rating': rating })
-      .then((results) => results);
+    return queries.getReaction(user_id, resource_id).then((results) => {
+
+      if (results[0]) {
+        knex('reactions')
+        .where({ 'resource_id': resource_id, "user_id": user_id })
+        .update({ 'rating': rating })
+        .then((results) => results);
+      } else {
+        knex('reactions')
+        .insert({ 'user_id': user_id, 'resource_id': resource_id, "rating": rating })
+        .then((results) => results);
+      }
+
+    });
 
     }
 
