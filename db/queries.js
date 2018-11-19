@@ -203,6 +203,12 @@ module.exports = (knex) => {
     .then((results) => results);
   }
 
-  
+  queries.aboutMe = function(user_id, about) {
+    return knex('users')
+    .where({'id': user_id})
+    .update({'about': about})
+    .then((results) => results);
+  }
+
   return queries;
 };

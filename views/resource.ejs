@@ -10,8 +10,10 @@
   <p><%= results.resource.description %></p>
 
   <% if (typeof userID !== "undefined") { %>
+
     <br>LIKES: <%= results.likes %>
     <br>RATING: <%= results.rating %> (<%= results.numUsers %> users)
+
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
         <button style="margin-left: 50%;" type="submit" name="liked">
           <%= (results.userReaction && results.userReaction.liked) ? "Unlike" : "Like" %>
