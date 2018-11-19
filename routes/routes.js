@@ -114,7 +114,6 @@ module.exports = (knex, query) => {
   router.get("/resource/:resourceID", (req, res) => {
     query.getResource(req.params.resourceID).then((results) => {
       res.render('resource', compileTemplateVars(req, results));
-      console.log(resource_id);
     })
   });
 
