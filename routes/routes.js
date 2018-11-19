@@ -128,15 +128,23 @@ module.exports = (knex, query) => {
 
     query.getResource(req.params.resourceID).then((results) => {
       queries = results;
-      console.log("-----------------\n" + JSON.stringify(queries));
       (
         (req.session.userID)
         ? query.getReaction(req.session.userID, req.params.resourceID)
         : Promise.resolve()
       ).then((results) => {
           queries.userReaction = results;
-          console.log(JSON.stringify(queries, null, 2));
-          res.render('resource', compileTemplateVars(req, queries ))
+
+          query.getReactions(req.params.resourceID).then((results) => {
+
+            queries.likes = results.reduce( (acc, cur) => (cur.liked) ? acc + 1 : acc, 0)
+            queries.rating = results.reduce( (acc, cur) => (cur.rating) ? acc + cur.rating : acc, 0) / results.length;
+
+            console.log(JSON.stringify(queries, null, 2));
+            res.render('resource', compileTemplateVars(req, queries ))
+
+          });
+
         });
     })
 
