@@ -81,6 +81,8 @@ module.exports = (knex) => {
 
     const out = {};
 
+    console.log("GETTING RESOURCE");
+
     return Promise.all([
 
       knex('resources')
@@ -93,9 +95,9 @@ module.exports = (knex) => {
         .select("*")
         .then((results) => out.comments = results),
 
-      knex("resources_topics")
-        .join("resources", "resources.id", "resources_topics.resource_id")
-        .join("topics", "resource_topics.topic_id", "topics.id")
+      knex("topics")
+        .join("resources_topics", "topics.id", "resources_topics.topic_id")
+        .join("resources", "resources_topics.resource_id", "resources.id")
         .where({"resources.id": resourceID})
         .select("topics.name as name", "topics.id as id")
         .then((results) => out.topic = results[0])
