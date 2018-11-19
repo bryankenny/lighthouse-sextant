@@ -60,33 +60,5 @@
     </div>
 </div>
 </div> 
-<div class="pinnednote activity">
-        <div class="name"><%= results[0].title %></div>
-      </div>
-      <div class="pinned-content">
-        <p><%= results[0].description %></p>
-      
-        <form method=POST action='/resource/:resourceID/like'>
-            <button type="submit" name=liked>like</button>
-      
-        </form>
-      
-        <form method=POST action='/resource/:resourceID/rate'>
-          <select type='submit' onchange="this.form.submit()"  name="rating">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-      
-            </select>
-        </form>
-      
-        <form method=POST action='/resource/:resourceID/comment'>
-          <textarea name="comment">add comment</textarea>
-          <button type="submit">Submit Comment</button>
-        </form>
-      
-      </div>
 
 <% include ./partials/_footer %>
