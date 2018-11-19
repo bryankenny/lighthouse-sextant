@@ -205,8 +205,8 @@ module.exports = (knex) => {
 
   queries.aboutMe = function(user_id, about) {
     return knex('users')
-    .where({'user.id': user_id})
-    .update({'users.about': about})
+    .where({'id': user_id})
+    .update({'about': about})
     .then((results) => results);
   }
 
