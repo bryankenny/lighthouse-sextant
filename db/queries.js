@@ -6,7 +6,7 @@ module.exports = (knex) => {
 
     return knex('users')
       .where({ id: id })
-      .select('name')
+      .select()
       .then((results) => results);
 
   }
