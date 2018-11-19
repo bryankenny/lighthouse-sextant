@@ -1,0 +1,21 @@
+<% include ./partials/_header %>
+
+<h3>Resources</h3>
+
+<div class="container">
+  <ul>
+      <div><ol>
+          <br>
+          <% results.forEach(function (result){ %>
+            <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
+             <%= result.description + " - " + "Topic: " + result.title %> 
+               <% }) %>
+      </div></ol>
+  
+    </ul>
+</div>
+
+
+
+
+<% include ./partials/_footer %>

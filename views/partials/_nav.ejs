@@ -32,6 +32,13 @@
             </form>
           </li>
 
+          <li class="nav-item">
+            <form method="post" action="/user-resources">
+              <input type="text" placeholder="Search by user" name="username">
+              <button type="submit">Search</button>
+            </form>
+          </li>
+
         <% } else { %>
 
           <li class="nav-item">
@@ -47,8 +54,10 @@
             </a>
           </li>
 
-        <% } %>
+       
 
+        <% } %>
+        
       </ul>
     </div>
   </nav>

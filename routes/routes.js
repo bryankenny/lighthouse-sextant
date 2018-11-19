@@ -208,6 +208,15 @@ module.exports = (knex, query) => {
 
 
 
+  router.post("/user-resources", (req, res) => {
+    const name = req.body.username;
+        console.log(name)
+
+    query.getUserResources(name)
+    .then(function (results) {
+      res.render('user-resources', compileTemplateVars(req, results));
+    })
+  })
 
 
   router.post('/resource/:resourceID/like', (req, res) => {
