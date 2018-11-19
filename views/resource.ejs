@@ -3,12 +3,16 @@
 <div class="pinnednote activity">
 
   <div class="name"><%= results.resource.title %></div>
+  <span class="badge badge-warning resource-details"><a href="/topic/<%= results.topic.id %>"><%= results.topic.name %></a></span>
 
 </div>
 <div class="pinned-content">
   <p><%= results.resource.description %></p>
 
   <% if (typeof userID !== "undefined") { %>
+
+    <br>LIKES: <%= results.likes %>
+    <br>RATING: <%= results.rating %> (<%= results.numUsers %> users)
 
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
         <button style="margin-left: 50%;" type="submit" name="liked">

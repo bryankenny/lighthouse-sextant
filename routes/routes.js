@@ -139,6 +139,7 @@ module.exports = (knex, query) => {
 
             queries.likes = results.reduce( (acc, cur) => (cur.liked) ? acc + 1 : acc, 0)
             queries.rating = results.reduce( (acc, cur) => (cur.rating) ? acc + cur.rating : acc, 0) / results.length;
+            queries.numUsers = results.length;
 
             console.log(JSON.stringify(queries, null, 2));
             res.render('resource', compileTemplateVars(req, queries ))
