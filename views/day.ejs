@@ -1,17 +1,15 @@
 <% include ./partials/_header %>
 
 <div class="pinnednote   activity">
-<div class="name">Resources for <%= results.day %></div>
+<div class="name"><i class="fa fa-calendar"></i> Resources for <%= results.day %></div>
 </div>
 
 <div class="pinned-content">
 <div class="instructions">
-  <ul>
     <% for (let i in results.resources) { %>
       <% let res = results.resources[i]; %>
       <% include ./partials/_resource-small %>
     <% } %>
-  </ul>
 </div>
 </div>
 

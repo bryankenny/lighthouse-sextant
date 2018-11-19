@@ -110,7 +110,7 @@ module.exports = (knex, query) => {
         ? query.getReaction(req.session.userID, req.params.resourceID)
         : Promise.resolve()
       ).then((results) => {
-          queries.userReaction = results;
+          queries.userReaction = results[0];
 
           query.getReactions(req.params.resourceID).then((results) => {
 

@@ -2,20 +2,25 @@
 
 <div class="pinnednote activity">
 
-  <div class="name"><%= results.resource.title %></div>
-  <span class="badge badge-warning user-details"><a href="/user/<%= results.user.id %>"><%= results.user.name %></a></span>
+  <a href="<%= results.resource.url %>"><div class="name"><%= results.resource.title %></div></a>
+  <span class="badge badge-warning user-details"><a href="/user/<%= results.user.id %>"><i class="fa fa-user"></i> <%= results.user.name %></a></span>
   <span class="badge badge-warning resource-details"><a href="/topic/<%= results.topic.id %>"><%= results.topic.name %></a></span>
 
 </div>
 <div class="pinned-content">
+  <p><a href="<%= results.resource.url %>"><%= results.resource.url %></a></p>
   <p><%= results.resource.description %></p>
 
   <% if (typeof userID !== "undefined") { %>
     <br>LIKES: <%= results.likes %>
     <br>RATING: <%= results.rating %> (<%= results.numUsers %> users)
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
-        <button style="margin-left: 50%;" type="submit" name="liked">
-          <%= (results.userReaction && results.userReaction.liked) ? "Unlike" : "Like" %>
+        <button type="submit" name="liked">
+          <% if (results.userReaction && results.userReaction.liked) { %>
+            <i class="fa fa-thumbs-o-down"></i> Unlike
+          <% } else { %>
+            <i class="fa fa-thumbs-o-up"></i> Like
+          <% } %>
         </button>
     </form>
     <form method=POST action='/resource/<%= results.resource.id %>/rate'>
@@ -42,14 +47,14 @@
                   <ul class="list-unstyled">
                       <li class="activity-feedback media mb-2" id="curriculum-feedback-99682">
                           <div class="mr-3">
-                              
+
                           </div>
                           <div class="media-body">
                               <strong class="media-heading">
                               </strong>
                               <div class="content">
                                   <% if (results.comments) { %>
-                                  
+
                                    <% for (let r in results.comment) { %>
                                     <%=  results[r].text %>
                                     console.log(results[r]);

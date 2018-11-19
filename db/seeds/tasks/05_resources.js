@@ -2,7 +2,7 @@
 module.exports = function(knex, Promise) {
   return Promise.all([
     knex("resources").insert({
-      url:          "https://medium.com/@HalahSalih/how-to-deploy-an-",
+      url:          "https://medium.com/@HalahSalih/how-to-deploy-an-express-app-to-heroku-with-postgresql-database-using-git-266e100d59ff",
       title:        "Deploying Express apps with a Postgres database to Heroku",
       description:  "How to deploy an Express app to Heroku with Postgresql Using Git",
       user_id:      1
