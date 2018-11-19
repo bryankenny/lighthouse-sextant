@@ -6,7 +6,8 @@
 <br>
 <br>
     <% results.forEach(function (result){ %>
-     <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
+     <li><a href= <%= result.url %>><%= result.url %></a> - <a href="/resource/<%= result.id %>">Detail</a></li>
+     
         <% }) %>
 </div></ol>
 <div><ol>
