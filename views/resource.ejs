@@ -10,10 +10,8 @@
   <p><%= results.resource.description %></p>
 
   <% if (typeof userID !== "undefined") { %>
-
     <br>LIKES: <%= results.likes %>
     <br>RATING: <%= results.rating %> (<%= results.numUsers %> users)
-
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
         <button style="margin-left: 50%;" type="submit" name="liked">
           <%= (results.userReaction && results.userReaction.liked) ? "Unlike" : "Like" %>
@@ -34,12 +32,10 @@
       <textarea name="comment">add comment</textarea>
       <br><button type="submit">Submit Comment</button>
     </form>
-    
-    
   <div class="card" style="margin-top:30px;">
-      <h5 class="card-header" id="feedback-form">Previous Feedback</h5>
+      <h5 class="card-header" id="feedback-form">Feedback</h5>
       <div class="card-body">
-          <h5 class="card-title">Your Feedback</h5>
+          <h5 class="card-title">Your Comments</h5>
           <div class="card-text">
               <div id="activity-feedback">
                   <ul class="list-unstyled">
@@ -51,11 +47,13 @@
                               <strong class="media-heading">
                               </strong>
                               <div class="content">
-                                <% if (results.comments) { %>
-                                  <% for (let r in results){ %>
-                                    <%= results[r].comments; %>
-                                    <% } %>
-                                    <% } %>
+                                  <% if (results.comments) { %>
+                                    <%= JSON.stringify(results.comments) %>
+                                   <% for (let r in results) { %>
+                                    <%=  results[r].comments %>
+                                  <%  } %>
+                                  <% } %>
+                                <% } %>
                               </div>
                           </div>
                       </li>
@@ -64,7 +62,6 @@
           </div>
       </div>
   </div>
-
 </div>
 
 <% include ./partials/_footer %>
