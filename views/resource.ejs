@@ -12,12 +12,12 @@
 
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
         <button style="margin-left: 50%;" type="submit" name="liked">
-          <%= (results.reaction && results.reaction.liked) ? "Unlike" : "Like" %>
+          <%= (results.userReaction && results.userReaction.liked) ? "Unlike" : "Like" %>
         </button>
     </form>
     <form method=POST action='/resource/<%= results.resource.id %>/rate'>
       <select style="float:right;" type='submit' onchange="this.form.submit()"  name="rating">
-          <% let rating = (results.reaction && results.reaction.rating) || 0 %>
+          <% let rating = (results.userReaction && results.userReaction.rating) || 0 %>
           <option <%= (rating === 0) && "selected" %> disabled></option>
           <option <%= (rating === 1) && "selected" %> >1</option>
           <option <%= (rating === 2) && "selected" %> >2</option>

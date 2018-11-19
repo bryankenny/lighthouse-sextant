@@ -134,7 +134,7 @@ module.exports = (knex, query) => {
         ? query.getReaction(req.session.userID, req.params.resourceID)
         : Promise.resolve()
       ).then((results) => {
-          queries.reaction = results;
+          queries.userReaction = results;
           console.log(JSON.stringify(queries, null, 2));
           res.render('resource', compileTemplateVars(req, queries ))
         });
