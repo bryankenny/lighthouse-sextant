@@ -112,9 +112,23 @@ module.exports = (knex, query) => {
 
 
   router.get("/resource/:resourceID", (req, res) => {
+
+    let queries;
+
     query.getResource(req.params.resourceID).then((results) => {
-      res.render('resource', compileTemplateVars(req, results));
+      queries = results;
+
+      (
+        (req.session.userID)
+        ? query.getReaction(req.session.userID, req.params.resourceID)
+        : Promise.resolve()
+      ).then((results) => {
+          queries = queries.concat(results);
+          console.log(JSON.stringify(queries, null, 2));
+          res.render('resource', compileTemplateVars(req, queries ))
+        });
     })
+
   });
 
 
@@ -225,8 +239,8 @@ module.exports = (knex, query) => {
     const user_id = req.session.userID;
     const resource_id = req.params.resourceID;
 
-    query.like(user_id, resource_id).then(function (results) {
-      res.redirect('/');
+    query.toggleLike(user_id, resource_id).then(function (results) {
+      res.redirect('/resource/' + req.params.resourceID);
     })
 
   });
@@ -242,7 +256,7 @@ module.exports = (knex, query) => {
 
     query.rate(user_id, resource_id, rating)
       .then(function (results) {
-        res.redirect('/');
+        res.redirect('/resource/' + req.params.resourceID);
       })
 
   });
