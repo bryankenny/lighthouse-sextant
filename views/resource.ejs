@@ -51,6 +51,7 @@
                               <strong class="media-heading">
                               </strong>
                               <div class="content">
+                                <% if (results.comments) { %>
                                   <% for (let r in results){ %>
                                     <%= results[r].comments; %>
                                     <% } %>
