@@ -194,5 +194,15 @@ module.exports = (knex) => {
 
   }
 
+
+  queries.getReactions = function(resource_id) {
+    return knex('resources')
+    .join('reactions', 'resources.id', 'reactions.resource_id')
+    .where({ 'resource_id': resource_id })
+    .select('resources.id', 'reactions.liked', 'reactions.rating')
+    .then((results) => results);
+  }
+
+  
   return queries;
 };
