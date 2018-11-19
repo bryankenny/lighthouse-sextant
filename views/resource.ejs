@@ -34,10 +34,35 @@
       <textarea name="comment">add comment</textarea>
       <br><button type="submit">Submit Comment</button>
     </form>
-    <% if (results.comments) { %>
-      <%= JSON.stringify(results.comments) %>
-    <% } %>
-  <% } %>
+    
+    
+  <div class="card" style="margin-top:30px;">
+      <h5 class="card-header" id="feedback-form">Previous Feedback</h5>
+      <div class="card-body">
+          <h5 class="card-title">Your Feedback</h5>
+          <div class="card-text">
+              <div id="activity-feedback">
+                  <ul class="list-unstyled">
+                      <li class="activity-feedback media mb-2" id="curriculum-feedback-99682">
+                          <div class="mr-3">
+                              
+                          </div>
+                          <div class="media-body">
+                              <strong class="media-heading">
+                              </strong>
+                              <div class="content">
+                                  <% for (let r in results){ %>
+                                    <%= results[r].comments; %>
+                                    <% } %>
+                                    <% } %>
+                              </div>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
 
 </div>
 
