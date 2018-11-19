@@ -32,7 +32,7 @@
       <textarea name="comment">add comment</textarea>
       <br><button type="submit">Submit Comment</button>
     </form>
-  <div class="card" style="margin-top:30px;">
+  <!-- <div class="card" style="margin-top:30px;">
       <h5 class="card-header" id="feedback-form">Feedback</h5>
       <div class="card-body">
           <h5 class="card-title">Your Comments</h5>
@@ -48,9 +48,10 @@
                               </strong>
                               <div class="content">
                                   <% if (results.comments) { %>
-                        
-                                   <% for (let r in results) { %>
-                                    <%=  results[r].comments %>
+                                  
+                                   <% for (let r in results.comment) { %>
+                                    <%=  results[r].text %>
+                                    console.log(results[r]);
                                   <%  } %>
                                   <% } %>
                                 <% } %>
@@ -62,6 +63,6 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
 
 <% include ./partials/_footer %>
