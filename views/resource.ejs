@@ -1,18 +1,18 @@
 <% include ./partials/_header %>
 
 <div class="pinnednote activity">
+    
   <div class="name"><%= results[0].title %></div>
+  
 </div>
 <div class="pinned-content">
   <p><%= results[0].description %></p>
 
   <form method=POST action='/resource/:resourceID/like'>
-      <button type="submit" name=liked>like</button>
-
+      <button style="margin-left: 50%;" type="submit" name=liked>like</button>
   </form>
-
   <form method=POST action='/resource/:resourceID/rate'>
-    <select type='submit' onchange="this.form.submit()"  name="rating">
+    <select style="float:right;" type='submit' onchange="this.form.submit()"  name="rating">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -24,7 +24,7 @@
 
   <form method=POST action='/resource/:resourceID/comment'>
     <textarea name="comment">add comment</textarea>
-    <button type="submit">Submit Comment</button>
+    <br><button type="submit">Submit Comment</button>
   </form>
 
 </div>
