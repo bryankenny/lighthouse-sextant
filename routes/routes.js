@@ -85,23 +85,23 @@ module.exports = (knex, query) => {
   });
 
 
-  router.get('/searchResults', (req, res) => {
-    if (!req.session.userID) res.redirect("/login");
+  // router.get('/searchResults', (req, res) => {
+  //   if (!req.session.userID) res.redirect("/login");
 
-    if (req.query.name) {
-      query.getUserResources(req.query.name).then((results) => {
-        // console.log(results);
-        res.render('searchResults', compileTemplateVars(req, results));
-      });
-    } else if (req.query.topic) {
-      query.getTopicResources(req.query.topic).then((results) => {
-        res.render('searchResults', compileTemplateVars(req, results));
-      });
-    } else {
-      res.redirect("/");
-    }
+  //   if (req.query.name) {
+  //     query.getUserResources(req.query.name).then((results) => {
+  //       // console.log(results);
+  //       res.render('searchResults', compileTemplateVars(req, results));
+  //     });
+  //   } else if (req.query.topic) {
+  //     query.getTopicResources(req.query.topic).then((results) => {
+  //       res.render('searchResults', compileTemplateVars(req, results));
+  //     });
+  //   } else {
+  //     res.redirect("/");
+  //   }
 
-  })
+  // })
 
 
   router.get("/day/:day", (req, res) => {
@@ -271,7 +271,7 @@ module.exports = (knex, query) => {
     const comment = req.body.comment;
     query.comment(user_id, resource_id, comment)
       .then(function (results) {
-        res.redirect('/');
+        res.redirect('/resource/' + resource_id);
       })
 
   });
