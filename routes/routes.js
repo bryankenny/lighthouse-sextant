@@ -86,6 +86,14 @@ module.exports = (knex, query) => {
 
   });
 
+  router.get("/new-resource", (req, res) => {
+
+    if (!req.session.userID) res.redirect("/login");
+    // console.log("GET my-resources");
+
+    res.render("new-resource");
+
+  });
 
   // router.get('/searchResults', (req, res) => {
   //   if (!req.session.userID) res.redirect("/login");
@@ -119,13 +127,13 @@ module.exports = (knex, query) => {
 
     query.getResource(req.params.resourceID).then((results) => {
       queries = results;
-
+      console.log("-----------------\n" + JSON.stringify(queries));
       (
         (req.session.userID)
         ? query.getReaction(req.session.userID, req.params.resourceID)
         : Promise.resolve()
       ).then((results) => {
-          queries = queries.concat(results);
+          queries.reaction = results;
           console.log(JSON.stringify(queries, null, 2));
           res.render('resource', compileTemplateVars(req, queries ))
         });

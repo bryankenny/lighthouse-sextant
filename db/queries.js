@@ -79,10 +79,25 @@ module.exports = (knex) => {
 
   queries.getResource = function (resourceID) {
 
+    const out = {};
+
     return knex('resources')
       .where({ 'resources.id': resourceID })
       .select("*")
-      .then((results) => results);
+      .then((results) => {
+        out.resource = results[0];
+
+        return knex("comments")
+          .where({"comments.resource_id": resourceID})
+          .select("*")
+          .then((results) => {
+
+            out.comments = results;
+            return out;
+
+          });
+
+      });
 
   }
 
@@ -173,7 +188,6 @@ module.exports = (knex) => {
       .then((results) => results);
 
   }
-
 
   return queries;
 };
