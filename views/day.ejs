@@ -11,15 +11,20 @@
 <br>
 <br>
 <br>
-    <% results.forEach(function (result){ %>
-     <li><a href= <%= result.url %>><%= result.url %></a> - <a href="/resource/<%= result.id %>">Detail</a></li>
+    <% results.forEach(function (res){ %>
+     <li><a href= <%= res.url %>><%= res.url %></a> - <a href="/resource/<%= res.id %>">Detail</a>
+        <% include ./partials/_resource-small %>
+
+    </li>
      
         <% }) %>
 </div></ol>
 <div><ol>
 <br>
 <% results.forEach(function (result){ %>
- <li> <%= result.description %></li>
+ <li> <%= result.description %>
+
+</li>
     <% }) %>
 </div></ol>
 

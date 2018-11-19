@@ -11,10 +11,13 @@
   <ul>
       <div><ol>
           <br>
-          <% results.forEach(function (result){ %>
-            <% var resID = result.id %><br>
-            <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
-             <%= result.description + " - " + "Topic: " + result.title %> <br> <a href= <%= '/resource/'+resID %>><%= "Like, Rate or Comment on Resource" %></a><br> 
+          <% results.forEach(function (res){ %>
+            <% var resID = res.id %><br>
+            <li><a href= <%= res.url %>><%= res.url %></a> </a> 
+              <% include ./partials/_resource-small %>
+
+            </li>
+             <%= res.description + " - " + "Topic: " + res.title %> <br> <a href= <%= '/resource/'+resID %>><%= "Like, Rate or Comment on Resource" %></a><br> 
                <% }) %>
               
       </div></ol>
