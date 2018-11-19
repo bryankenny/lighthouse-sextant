@@ -81,23 +81,26 @@ module.exports = (knex) => {
 
     const out = {};
 
-    return knex('resources')
-      .where({ 'resources.id': resourceID })
-      .select("*")
-      .then((results) => {
-        out.resource = results[0];
+    return Promise.all([
 
-        return knex("comments")
-          .where({"comments.resource_id": resourceID})
-          .select("*")
-          .then((results) => {
+      knex('resources')
+        .where({ 'resources.id': resourceID })
+        .select("*")
+        .then((results) => out.resource = results[0] ),
 
-            out.comments = results;
-            return out;
+      knex("comments")
+        .where({"comments.resource_id": resourceID})
+        .select("*")
+        .then((results) => out.comments = results),
 
-          });
+      knex("resources_topics")
+        .join("resources", "resources.id", "resources_topics.resource_id")
+        .join("topics", "resource_topics.topic_id", "topics.id")
+        .where({"resources.id": resourceID})
+        .select("topics.name as name", "topics.id as id")
+        .then((results) => out.topic = results[0])
 
-      });
+    ]).then(() => out);
 
   }
 

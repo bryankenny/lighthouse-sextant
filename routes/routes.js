@@ -39,6 +39,7 @@ module.exports = (knex, query) => {
 
     query.getRecentResources()
       .then( (results) => {
+        console.log(JSON.stringify(results, null, 2));
         res.render('index', compileTemplateVars(req, results));
       })
 
