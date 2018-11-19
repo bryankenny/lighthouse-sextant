@@ -96,30 +96,7 @@ module.exports = (knex, query) => {
 
   });
 
-  // router.get('/searchResults', (req, res) => {
-  //   if (!req.session.userID) res.redirect("/login");
 
-  //   if (req.query.name) {
-  //     query.getUserResources(req.query.name).then((results) => {
-  //       // console.log(results);
-  //       res.render('searchResults', compileTemplateVars(req, results));
-  //     });
-  //   } else if (req.query.topic) {
-  //     query.getTopicResources(req.query.topic).then((results) => {
-  //       res.render('searchResults', compileTemplateVars(req, results));
-  //     });
-  //   } else {
-  //     res.redirect("/");
-  //   }
-
-  // })
-
-
-  router.get("/day/:day", (req, res) => {
-    query.getDayResources(req.params.day).then((results) => {
-      res.render('day', compileTemplateVars(req, results));
-    })
-  });
 
 
   router.get("/resource/:resourceID", (req, res) => {
@@ -149,6 +126,62 @@ module.exports = (knex, query) => {
         });
     })
 
+  });
+
+
+  router.get("/topic/:topicID", (req, res) => {
+
+    const queries = {};
+
+    query.getTopicResources(req.params.topicID)
+      .then( (results) => {
+
+        queries.resources = results;
+
+        query.getTopicName(req.params.topicID)
+          .then( (topic) => {
+
+            queries.topic = topic[0];
+            res.render('topic', compileTemplateVars(req, queries));
+
+          });
+
+      })
+
+  });
+
+  router.get("/user/:userID", (req, res) => {
+
+    const queries = {};
+
+    query.getUserResources(req.params.userID)
+      .then( (results) => {
+
+        queries.resources = results;
+
+        query.getUserName(req.params.userID)
+          .then( (user) => {
+
+            queries.user = user[0].name;
+            res.render('user', compileTemplateVars(req, queries));
+
+          });
+
+      })
+
+  });
+
+  router.get("/day/:dayID", (req, res) => {
+
+    const queries = {day: req.params.dayID};
+
+    query.getDayResources(req.params.dayID)
+      .then((results) => {
+
+        queries.resources = results;
+        res.render('day', compileTemplateVars(req, queries));
+
+    })
   });
 
 
