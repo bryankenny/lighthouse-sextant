@@ -7,9 +7,11 @@
       <div><ol>
           <br>
           <% results.forEach(function (result){ %>
+            <% var resID = result.id %>
             <li><a href= <%= result.url %>><%= result.url %></a> </a> </li>
-             <%= result.description + " - " + "Topic: " + result.title %> 
+             <%= result.description + " - " + "Topic: " + result.title %> <br> <a href= <%= '/resource/'+resID %>><%= "Like, Rate or Comment on Resource" %></a> 
                <% }) %>
+              
       </div></ol>
   
     </ul>
@@ -19,3 +21,4 @@
 
 
 <% include ./partials/_footer %>
+

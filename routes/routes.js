@@ -114,6 +114,7 @@ module.exports = (knex, query) => {
   router.get("/resource/:resourceID", (req, res) => {
     query.getResource(req.params.resourceID).then((results) => {
       res.render('resource', compileTemplateVars(req, results));
+      console.log(resource_id);
     })
   });
 
@@ -169,7 +170,6 @@ module.exports = (knex, query) => {
         res.status(401);
         res.render('error', templateVars);
       })
-      console.log(req.body.name);
   });
 
 
@@ -197,9 +197,8 @@ module.exports = (knex, query) => {
       url: body.resource_url,
       title: body.resource_topic,
       description: body.resource_description,
-      user_id: userID
+      user_id: userID,
     }
-    console.log('resourceBody', resourceBody)
     knex('resources').insert(resourceBody).then((data) => {
       res.redirect('my-resources');
     }).catch((error) => {
