@@ -230,7 +230,13 @@ module.exports = (knex, query) => {
     })
   });
 
-
+  router.post("/profile", (req, res) => {
+    const about = req.body.about;
+    query.aboutMe(req.session.userID, about)
+    .then(function (results) {
+      res.render("profile", compileTemplateVars(req, results));
+    })
+  })
 
   router.post("/user-resources", (req, res) => {
     const name = req.body.username;
