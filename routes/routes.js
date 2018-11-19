@@ -3,8 +3,10 @@
 const express = require('express');
 const router = express.Router();
 
+const moment = require("moment");
+
 function compileTemplateVars(req, results) {
-  return {results, userID: req.session.userID, userName: req.session.userName};
+  return {results, userID: req.session.userID, userName: req.session.userName, moment: moment};
 }
 
 module.exports = (knex, query) => {

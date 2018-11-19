@@ -1,0 +1,14 @@
+<div class="reading   activity">
+<a href="<%= res.url %>">
+  <div class="icon icon-type" title="Reading">
+      <i class="fa fa-book"></i>
+  </div>
+
+  <div class="time time-duration">
+      <%= moment(res.created_at).fromNow() %>
+  </div>
+
+  <div class="name"><%= res.title %> &nbsp;</div>
+</a>
+  <span class="badge badge-warning resource-details"><a href="/resource/<%= res.id %>">Details</a></span>
+</div>
