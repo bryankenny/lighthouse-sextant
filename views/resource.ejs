@@ -3,13 +3,15 @@
 <div class="pinnednote activity">
 
   <div class="name"><%= results.resource.title %></div>
+  <span class="badge badge-warning resource-details"><a href="/topic/<%= results.topic.id %>"><%= results.topic.name %></a></span>
 
 </div>
 <div class="pinned-content">
   <p><%= results.resource.description %></p>
 
   <% if (typeof userID !== "undefined") { %>
-
+    <br>LIKES: <%= results.likes %>
+    <br>RATING: <%= results.rating %> (<%= results.numUsers %> users)
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
         <button style="margin-left: 50%;" type="submit" name="liked">
           <%= (results.userReaction && results.userReaction.liked) ? "Unlike" : "Like" %>
@@ -24,27 +26,16 @@
           <option <%= (rating === 3) && "selected" %> >3</option>
           <option <%= (rating === 4) && "selected" %> >4</option>
           <option <%= (rating === 5) && "selected" %> >5</option>
-
         </select>
     </form>
-
     <form method=POST action='/resource/<%= results.resource.id %>/comment'>
       <textarea name="comment">add comment</textarea>
       <br><button type="submit">Submit Comment</button>
     </form>
-
-    <% if (results.comments) %>
-    <%= JSON.stringify(results.comments) %>
-
-    <% for (let c in results){ %>
-      <%= results[c].comments; %>
-      <% } %>
-
+    <% if (results.comments) { %>
+      <%= JSON.stringify(results.comments) %>
     <% } %>
-  
-     
-
-  
+  <% } %>
 
 </div>
 
