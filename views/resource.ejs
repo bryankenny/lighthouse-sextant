@@ -33,13 +33,18 @@
       <br><button type="submit">Submit Comment</button>
     </form>
 
-    <% if (results.comments) { %>
+    <% if (results.comments) %>
+    <%= JSON.stringify(results.comments) %>
 
-      <%= JSON.stringify(results.comments) %>
+    <% for (let c in results){ %>
+      <%= results[c].comments; %>
+      <% } %>
 
     <% } %>
+  
+     
 
-  <% } %>
+  
 
 </div>
 
