@@ -3,6 +3,7 @@
 <div class="pinnednote activity">
 
   <div class="name"><%= results.resource.title %></div>
+  <span class="badge badge-warning user-details"><a href="/user/<%= results.user.id %>"><%= results.user.name %></a></span>
   <span class="badge badge-warning resource-details"><a href="/topic/<%= results.topic.id %>"><%= results.topic.name %></a></span>
 
 </div>

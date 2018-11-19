@@ -127,7 +127,13 @@ module.exports = (knex) => {
         .join("resources", "resources_topics.resource_id", "resources.id")
         .where({"resources.id": resourceID})
         .select("topics.name as name", "topics.id as id")
-        .then((results) => out.topic = results[0])
+        .then((results) => out.topic = results[0]),
+
+      knex("users")
+        .join("resources", "resources.user_id", "users.id")
+        .where({"resources.id": resourceID})
+        .select("users.name as name", "users.id as id")
+        .then((results) => out.user = results[0])
 
     ]).then(() => out);
 
@@ -210,7 +216,7 @@ module.exports = (knex) => {
 
     });
 
-    }
+  }
 
   queries.comment = function (user_id, resource_id, comment) {
 
@@ -220,7 +226,6 @@ module.exports = (knex) => {
       .then((results) => results);
 
   }
-
 
   queries.getReactions = function(resource_id) {
     return knex('resources')
