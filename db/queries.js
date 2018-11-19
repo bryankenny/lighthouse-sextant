@@ -41,12 +41,39 @@ module.exports = (knex) => {
 
   };
 
-  queries.getTopicResources = function (topicName) {
+  queries.getTopicResources = function (topicID) {
 
     return knex('resources')
       .join("resources_topics", "resources.id", "resources_topics.resource_id")
       .join("topics", "resources_topics.topic_id", "topics.id")
-      .where({ "topics.name": topicName })
+      .where({ "topics.id": topicID })
+      .select("resources.*")
+      .then((results) => results);
+
+  };
+
+  queries.getTopicName = function (topicID) {
+
+    return knex("topics")
+      .where({"topics.id": topicID})
+      .select("*")
+      .then((results) => results);
+
+  };
+
+  queries.getUserResources = function (userID) {
+
+    return knex('resources')
+      .where({ "resources.user_id": userID })
+      .select("resources.*")
+      .then((results) => results);
+
+  };
+
+  queries.getUserName = function (userID) {
+
+    return knex("users")
+      .where({"users.id": userID})
       .select("*")
       .then((results) => results);
 
@@ -71,7 +98,7 @@ module.exports = (knex) => {
       .join("resources", "resources_topics.resource_id", "resources.id")
       .join("users", "resources.user_id", "users.id")
       .where({ 'days.day': day })
-      .select("resources.*", "topics.id AS topic_id", "users.name AS user_name")
+      .select("resources.*")
       .orderBy("topics.name")
       .then((results) => results);
 
