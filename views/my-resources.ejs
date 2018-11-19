@@ -8,20 +8,11 @@
   
   <div class="pinned-content">
   <div class="instructions">
-  <ul>
-      <div><ol>
-          <br>
-          <% results.forEach(function (res){ %>
-            <% var resID = res.id %><br>
-            <li><a href= <%= res.url %>><%= res.url %></a> </a> 
-              <% include ./partials/_resource-small %>
-
-            </li>
-             <%= res.description + " - " + "Topic: " + res.title %> <br> <a href= <%= '/resource/'+resID %>><%= "Like, Rate or Comment on Resource" %></a><br> 
-               <% }) %>
-              
-      </div></ol>
-  
+    <ul>
+      <% for (let i in results) { %>
+        <% let res = results[i]; %>
+        <% include ./partials/_resource-small %>
+      <% } %>
     </ul>
 </div>
 

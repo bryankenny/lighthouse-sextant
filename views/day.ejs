@@ -7,26 +7,12 @@
     <div class="pinned-content">
     <div class="instructions">
   
-<div ><ol>
-<br>
-<br>
-<br>
-    <% results.forEach(function (res){ %>
-     <li><a href= <%= res.url %>><%= res.url %></a> - <a href="/resource/<%= res.id %>">Detail</a>
-        <% include ./partials/_resource-small %>
-
-    </li>
-     
-        <% }) %>
-</div></ol>
-<div><ol>
-<br>
-<% results.forEach(function (result){ %>
- <li> <%= result.description %>
-
-</li>
-    <% }) %>
-</div></ol>
+        <ul>
+            <% for (let i in results) { %>
+              <% let res = results[i]; %>
+              <% include ./partials/_resource-small %>
+            <% } %>
+          </ul>
 
 <% include ./partials/_footer %>
 
