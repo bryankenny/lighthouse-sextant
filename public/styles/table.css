@@ -14103,12 +14103,14 @@ a.activity:hover {
   color: #34495e;
   font-size: 12px;
   left: 70px;
-  line-height: 20px;
-  /* margin-top: -50px; */
-  padding: 4px 0;
+  line-height: 100%;
+  /* padding: 12px 0; */
   position: absolute;
   text-align: center;
-  width: 50px
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .activity .time-duration {
@@ -15972,9 +15974,5 @@ body.admin-cohorts-show table.students tr a.tech-interview .badge-primary,body.a
 
 }
 
-.display-flex {
-  display: table;
-  align-items: center;
-}
 
 
