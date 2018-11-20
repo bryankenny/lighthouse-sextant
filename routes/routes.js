@@ -5,6 +5,25 @@ const router = express.Router();
 
 const moment = require("moment");
 
+moment.updateLocale("en", {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: "%ds",
+    ss: "%ds",
+    m: "%dm",
+    mm: "%dm",
+    h: "%dh",
+    hh: "%dh",
+    d: "%dd",
+    dd: "%dd",
+    M: "%dM",
+    MM: "%dM",
+    y: "%dY",
+    yy: "%dY",
+  },
+})
+
 function compileTemplateVars(req, results) {
   return {results, userID: req.session.userID, userName: req.session.userName, moment: moment};
 }
@@ -115,9 +134,12 @@ module.exports = (knex, query) => {
           query.getReactions(req.params.resourceID).then((results) => {
 
             queries.likes = results.reduce( (acc, cur) => (cur.liked) ? acc + 1 : acc, 0)
-            queries.rating = (results.length > 0)
-              ? (results.reduce( (acc, cur) => (cur.rating) ? acc + cur.rating : acc, 0) / results.length)
-              : 0;
+            if (results.length > 0) {
+              queries.rating = results.reduce( (acc, cur) => (cur.rating) ? acc + cur.rating : acc, 0) / results.length;
+              queries.rating = Math.floor(queries.rating * 2) / 2;
+            } else {
+              queries.rating = 0;
+            }
             queries.numUsers = results.length;
 
             // console.log(JSON.stringify(queries, null, 2));
