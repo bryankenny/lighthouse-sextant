@@ -14103,7 +14103,7 @@ a.activity:hover {
   color: #34495e;
   font-size: 12px;
   left: 70px;
-  line-height: 100%;
+  line-height: 20px;
   /* margin-top: -50px; */
   padding: 4px 0;
   position: absolute;
@@ -15972,5 +15972,9 @@ body.admin-cohorts-show table.students tr a.tech-interview .badge-primary,body.a
 
 }
 
+.display-flex {
+  display: table;
+  align-items: center;
+}
 
 

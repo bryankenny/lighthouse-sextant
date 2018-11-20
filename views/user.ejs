@@ -2,18 +2,15 @@
 
 
 <div class="pinnednote   activity">
-<i class="fa fa-user"></i>
-<span class="name"><%= results.user %>'s Resources</span>
+<div class="name"><i class="fa fa-user"></i> <%= results.user %>'s Resources</div>
 </div>
 
 <div class="pinned-content">
 <div class="instructions">
-  <ul>
     <% for (let i in results.resources) { %>
       <% let res = results.resources[i]; %>
       <% include ./partials/_resource-small %>
     <% } %>
-  </ul>
 </div>
 </div>
 

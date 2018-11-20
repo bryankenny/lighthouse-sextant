@@ -12,8 +12,8 @@
   <p><%= results.resource.description %></p>
 
   <% if (typeof userID !== "undefined") { %>
-    <br>LIKES: <%= results.likes %>
-    <br>RATING: <%= results.rating %> (<%= results.numUsers %> users)
+    <br><%= results.likes %> people like this resource
+    <br><%= results.rating %> (<%= results.numUsers %> users)
     <form method=POST action='/resource/<%= results.resource.id %>/like'>
         <button type="submit" name="liked">
           <% if (results.userReaction && results.userReaction.liked) { %>
@@ -24,7 +24,7 @@
         </button>
     </form>
     <form method=POST action='/resource/<%= results.resource.id %>/rate'>
-      <select style="float:right;" type='submit' onchange="this.form.submit()"  name="rating">
+      <select type='submit' onchange="this.form.submit()"  name="rating">
           <% let rating = (results.userReaction && results.userReaction.rating) || 0 %>
           <option <%= (rating === 0) && "selected" %> disabled></option>
           <option <%= (rating === 1) && "selected" %> >1</option>
