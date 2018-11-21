@@ -40,7 +40,7 @@
     <form method=POST action='/resource/<%= results.resource.id %>/rate'>
       <select class="btn navbar-btn btn-primary btn-rating" type='submit' onchange="this.form.submit()" name="rating">
         <% let rating = (results.userReaction && results.userReaction.rating) || 0 %>
-        <option <%= (rating === 0) && "selected" %> disabled></option>
+        <option <%= (rating === 0) && "selected" %> disabled>Not Rated</option>
         <option <%= (rating === 1) && "selected" %> value="1">1 Duckies</option>
         <option <%= (rating === 2) && "selected" %> value="2">2 Duckies</option>
         <option <%= (rating === 3) && "selected" %> value="3">3 Duckies</option>
