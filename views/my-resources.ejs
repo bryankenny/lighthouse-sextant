@@ -2,18 +2,29 @@
 <% include ./partials/_header %>
 
 <div class="pinnednote   activity">
-<div class="name"><i class="fa fa-user"></i> My Resources</div>
+  <div class="name"><i class="fa fa-user"></i> My Resources</div>
 </div>
 
-  <div class="pinned-content">
+<div class="pinned-content">
   <div class="instructions">
-    <% for (let i in results) { %>
-      <% let res = results[i]; %>
+    <% for (let i in results.mine) { %>
+      <% let res = results.mine[i]; %>
       <% include ./partials/_resource-small %>
     <% } %>
+  </div>
 </div>
 
+<div class="pinnednote   activity">
+  <div class="name"><i class="fa fa-user"></i> My Likes</div>
+</div>
 
-
+<div class="pinned-content">
+  <div class="instructions">
+    <% for (let i in results.liked) { %>
+      <% let res = results.liked[i]; %>
+      <% include ./partials/_resource-small %>
+    <% } %>
+  </div>
+</div>
 
 <% include ./partials/_footer %>

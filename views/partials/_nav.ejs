@@ -9,12 +9,6 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a title="My Resources" class="nav-link" href="/my-resources">
-            <i class="fa fa-fw fa-flag"></i>
-            <span class="label">My Resources</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a title="New Resource" class="nav-link" href="/new-resource">
             <i class="fa fa-fw fa-flag"></i>
             <span class="label">New Resource</span>
@@ -26,9 +20,9 @@
         <% if (typeof userID !== "undefined") { %>
 
           <li class="nav-item current-user">
-            <a title="Profile" class="dropdown-toggle nav-link" href="/profile">
+            <a title="My Resources" class="nav-link" href="/my-resources">
               <i class="fa fa-fw fa-cogs"></i>
-              <span class="label" id="feedback-link"><%= userName %></span>
+              <span class="label" id="feedback-link"><%= userName %> </span>
             </a>
           </li>
 

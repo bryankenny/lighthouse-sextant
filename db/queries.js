@@ -2,12 +2,25 @@ module.exports = (knex) => {
 
   const queries = {};
 
-  queries.getProfile = function (id) {
+  queries.addResource = function (resource) {
 
-    return knex('users')
-      .where({ id: id })
-      .select()
-      .then((results) => results);
+    return knex("resources")
+      .insert({
+        url: resource.url,
+        title: resource.title,
+        description: resource.description,
+        user_id: resource.user_id
+      })
+      .returning("id")
+      .then((results) => {
+
+        return knex("resources_topics")
+          .insert({
+            resource_id: results[0],
+            topic_id: resource.topic
+          })
+
+      });
 
   }
 
@@ -18,28 +31,21 @@ module.exports = (knex) => {
       knex('resources')
         .where({ user_id: userID })
         .select("*")
+        .orderBy("created_at", "desc")
         .then(function (mine) {
           results.mine = mine;
         }),
       knex('resources')
         .join('reactions', 'resources.id', 'reactions.resource_id')
+        .where({"reactions.user_id": userID, "reactions.liked": true})
         .select('*')
+        .orderBy("created_at", "desc")
         .then(function (liked) {
           results.liked = liked;
         })
     ]).then(() => results);
 
   }
-
-  queries.getUserResources = function (userName) {
-
-    return knex('resources')
-      .join("users", "resources.user_id", "users.id")
-      .where({ "users.name": userName })
-      .select("*")
-      .then((results) => results);
-
-  };
 
   queries.getTopicResources = function (topicID) {
 
@@ -48,6 +54,7 @@ module.exports = (knex) => {
       .join("topics", "resources_topics.topic_id", "topics.id")
       .where({ "topics.id": topicID })
       .select("resources.*")
+      .orderBy("created_at", "desc")
       .then((results) => results);
 
   };
@@ -66,6 +73,7 @@ module.exports = (knex) => {
     return knex('resources')
       .where({ "resources.user_id": userID })
       .select("resources.*")
+      .orderBy("created_at", "desc")
       .then((results) => results);
 
   };
@@ -83,7 +91,7 @@ module.exports = (knex) => {
 
     return knex("resources")
       .select("*")
-      .orderBy("id", "desc")
+      .orderBy("created_at", "desc")
       .limit(5)
       .then((results) => results);
 
@@ -99,7 +107,7 @@ module.exports = (knex) => {
       .join("users", "resources.user_id", "users.id")
       .where({ 'days.day': day })
       .select("resources.*")
-      .orderBy("resources.created_at")
+      .orderBy("resources.created_at", "desc")
       .distinct()
       .then((results) => results);
 

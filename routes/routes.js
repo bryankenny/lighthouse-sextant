@@ -82,26 +82,12 @@ module.exports = (knex, query) => {
 
   });
 
-
-  router.get("/profile", (req, res) => {
-
-    if (!req.session.userID) res.redirect("/login");
-
-    query.getProfile(req.session.userID)
-      .then(function (results) {
-        res.render('profile', compileTemplateVars(req, results));
-      })
-
-  });
-
-
   router.get("/my-resources", (req, res) => {
 
     if (!req.session.userID) res.redirect("/login");
     // console.log("GET my-resources");
     query.getMyResources(req.session.userID).then((results) => {
-      const resources = results.mine
-      res.render('my-resources', compileTemplateVars(req, resources));
+      res.render('my-resources', compileTemplateVars(req, results));
     });
 
   });
@@ -111,7 +97,7 @@ module.exports = (knex, query) => {
     if (!req.session.userID) res.redirect("/login");
     // console.log("GET my-resources");
 
-    res.render("new-resource");
+    res.render("new-resource", compileTemplateVars(req));
 
   });
 
@@ -208,6 +194,18 @@ module.exports = (knex, query) => {
     })
   });
 
+  router.get("/*", (req, res) => {
+
+    const err = {
+      code: 404,
+      msg: "Couldn't find the requested document"
+    }
+    res.status(err.code);
+
+    console.log(JSON.stringify(compileTemplateVars(req, err)));
+    res.render("error", compileTemplateVars(req, err));
+
+  });
 
   // POSTS -----------------------------------------------------------------------
 
@@ -215,12 +213,12 @@ module.exports = (knex, query) => {
     const name = req.body.name
 
     if (!name) {
-      const templateVars = {
-        errCode: 400,
-        errMsg: 'missing name'
+      const err = {
+        code: 400,
+        msg: 'missing name'
       }
-      res.status(400);
-      res.render('error', templateVars);
+      res.status(err.code);
+      res.render('error', compileTemplateVars(req, err));
     } else {
 
       query.registerUser(req.body.name)
@@ -230,12 +228,12 @@ module.exports = (knex, query) => {
           res.redirect('/')
         })
         .catch(function (error) {
-          let templateVars = {
-            errCode: 401,
-            errMsg: 'name already exists'
+          let err = {
+            code: 401,
+            msg: 'name already exists'
           }
           res.status(401);
-          res.render('error', templateVars);
+          res.render('error', compileTemplateVars(req, err));
         })
 
     }
@@ -253,12 +251,12 @@ module.exports = (knex, query) => {
         res.redirect('/')
       })
       .catch(function (error) {
-        let templateVars = {
-          errCode: 401,
-          errMsg: 'name not found'
+        let err = {
+          code: 401,
+          msg: 'name not found'
         }
         res.status(401);
-        res.render('error', templateVars);
+        res.render('error', compileTemplateVars(req, err));
       })
   });
 
@@ -279,40 +277,24 @@ module.exports = (knex, query) => {
 
   });
 
-  router.post('/my-resources', (req, res) => {
+  router.post('/new-resource', (req, res) => {
     const userID = req.session.userID;
     const body = req.body;
 
-     const resourceBody = {
-      url: body.resource_url,
-      title: body.resource_topic,
-      description: body.resource_description,
+    const resourceBody = {
+      url: body.url,
+      title: body.title,
+      description: body.description,
+      topic: Number(body.topic),
       user_id: userID,
     }
-    knex('resources').insert(resourceBody).then((data) => {
+
+    query.addResource(resourceBody).then((results) => {
       res.redirect('my-resources');
     }).catch((error) => {
       res.status(500).json({error: error.message});
     })
   });
-
-  // router.post("/profile", (req, res) => {
-  //   const about = req.body.about;
-  //   query.aboutMe(req.session.userID, about)
-  //   .then(function (results) {
-  //     res.render("profile", compileTemplateVars(req, results));
-  //   })
-  // })
-
-  router.post("/user-resources", (req, res) => {
-    const name = req.body.username;
-        console.log(name)
-
-    query.getUserResources(name)
-    .then(function (results) {
-      res.render('user-resources', compileTemplateVars(req, results));
-    })
-  })
 
 
   router.post('/resource/:resourceID/like', (req, res) => {
@@ -359,6 +341,17 @@ module.exports = (knex, query) => {
 
   });
 
+  router.post("/*", (req, res) => {
+
+    const err = {
+      code: 404,
+      msg: "Couldn't find the requested document"
+    }
+    res.status(err.code);
+
+    res.render("error", compileTemplateVars(req, err));
+
+  });
 
   return router;
 
