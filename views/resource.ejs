@@ -1,24 +1,10 @@
-
-
-<!DOCTYPE html>
-<html>
-<head>
 <% include ./partials/_header %>
-<script language="JavaScript">
-    function showInput() {
-        document.getElementById('display').innerHTML = 
-                    document.getElementById("user_input").value;
-    }
-  </script>
-
-</head>
 
 <div class="pinnednote activity">
 
   <a href="<%= results.resource.url %>"><div class="name"><%= results.resource.title %></div></a>
-  
   <span class="badge badge-warning user-details"><a href="/user/<%= results.user.id %>"><i class="fa fa-user"></i> <%= results.user.name %></a></span>
-  
+  <span class="badge badge-warning resource-details"><a href="/topic/<%= results.topic.id %>"><%= results.topic.name %></a></span>
 
 </div>
 <div class="pinned-content">
@@ -37,7 +23,6 @@
           <% } %>
         </button>
     </form>
-    <body>
     <form method=POST action='/resource/<%= results.resource.id %>/rate'>
       <select type='submit' onchange="this.form.submit()"  name="rating">
           <% let rating = (results.userReaction && results.userReaction.rating) || 0 %>
@@ -48,42 +33,32 @@
           <option <%= (rating === 4) && "selected" %> >4</option>
           <option <%= (rating === 5) && "selected" %> >5</option>
         </select>
-
-  <div class="card" style="margin-top:30px;">
+    </form>
+    <form method=POST action='/resource/<%= results.resource.id %>/comment'>
+      <textarea name="comment">add comment</textarea>
+      <br><button type="submit">Submit Comment</button>
+    </form>
+  <!-- <div class="card" style="margin-top:30px;">
       <h5 class="card-header" id="feedback-form">Feedback</h5>
       <div class="card-body">
           <h5 class="card-title">Your Comments</h5>
           <div class="card-text">
-              <form method=POST action='/resource/<%= results.resource.id %>/comment'>
-                <input type="text" name="message" id="user_input">
-              </form>  
-                
-  <label>Your input: </label>
-  <p><span id='display'></span></p>
-
-<% if (results.comments) { %>
-
-  <% for (let r in results.comments.text) { %>
-   <%=  results[r].comments.text %>
-   console.log(results[r].text);
- <%  } %>
- <% } %>
-<% } %>
-
-<input type="submit" onclick="showInput();"><br/>
-              
-            </body>
               <div id="activity-feedback">
                   <ul class="list-unstyled">
                       <li class="activity-feedback media mb-2" id="curriculum-feedback-99682">
                           <div class="mr-3">
-
                           </div>
                           <div class="media-body">
                               <strong class="media-heading">
                               </strong>
                               <div class="content">
-                        
+                                  <% if (results.comments) { %>
+                                   <% for (let r in results.comment) { %>
+                                    <%=  results[r].text %>
+                                    console.log(results[r]);
+                                  <%  } %>
+                                  <% } %>
+                                <% } %>
                               </div>
                           </div>
                       </li>
@@ -92,6 +67,6 @@
           </div>
       </div>
   </div>
-</div>
-</html>
+</div> -->
+
 <% include ./partials/_footer %>
