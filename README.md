@@ -2,6 +2,8 @@
 
 This project is intended to serve as a collection of useful links, docs, specs, cheat sheets, etc for students participating in a Lighthouse Labs program.
 
+We chose to emulate the design of Lighthouse Labs' learning platform, Compass, with the aim of being a proof-of-concept that Compass could eventually incorporate.
+
 
 ## Usage
 
@@ -33,6 +35,10 @@ This project is intended to serve as a collection of useful links, docs, specs, 
   ```
 - `npm start`
 - Direct your browser to [http://localhost:8080](http://localhost:8080)
+
+### Signing In
+
+The app allows you to register a new user name, but you can just log in as "Adam", "Bryan", or "Cam". We won't mind.
 
 ## Dependencies
 
