@@ -2,8 +2,15 @@
 
 This project is intended to serve as a collection of useful links, docs, specs, cheat sheets, etc for students participating in a Lighthouse Labs program.
 
+![Sextant](public/assets/sextant.png)
+
 We chose to emulate the design of Lighthouse Labs' learning platform, Compass, with the aim of being a proof-of-concept that Compass could eventually incorporate.
 
+![A comparison of Sextant and Compass](public/assets/comparison.gif)
+
+## Contributors
+
+Sextant was developed by [Adam Lovatt](https://github.com/jalovatt/), [Bryan Kenny](https://github.com/bryankenny), and [Cam Gehmlich](https://github.com/cgehmlich).
 
 ## Usage
 
@@ -49,9 +56,13 @@ The app allows you to register a new user name, but you can just log in as "Adam
 - PG
 - Moment.js
 
-## Development Dependencies
+### Development Dependencies
 
 - Knex Logger
 - Morgan
 - Nodemon
 - Dotenv
+
+## Assets
+
+We borrowed liberally from Lighthouse Labs' stylesheets and markup, obviously. Cheers to the Compass development team.
