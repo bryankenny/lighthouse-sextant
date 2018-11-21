@@ -43,7 +43,14 @@ module.exports = function(knex, Promise) {
       {day_id: 18, topic_id: 4},
       {day_id: 19, topic_id: 1},
       {day_id: 20, topic_id: 1},
-      {day_id: 20, topic_id: 9}
+      {day_id: 20, topic_id: 9},
+      {day_id: 21, topic_id: 5},
+      {day_id: 21, topic_id: 9},
+      {day_id: 21, topic_id: 8},
+      {day_id: 21, topic_id: 7},
+      {day_id: 22, topic_id: 2},
+      {day_id: 22, topic_id: 15},
+      {day_id: 23, topic_id: 12}
     ])
   ]);
 };
