@@ -2,47 +2,43 @@
 <% include ./partials/_header %>
 
 <div class="pinnednote   activity">
-  <div class="name"><i class="fa fa-user"></i> Submit A New Resource</div>
-</div>
-<div class="pinned-content">
+                         
+<h5 class="card-header" id="feedback-form">Submit Resource</h5>
+<div class="card-body">
         <form id="formInput" novalidate="novalidate"  action="/my-resources" accept-charset="UTF-8" data-remote="true" method="post">
-            <div class="form-group text optional activity_feedback_detail">
-              <input type="text" class="form-control text" placeholder="Resource title" name="title" id="activity_feedback_detail">
-            </div>
-            <div class="form-group text optional activity_feedback_detail">
-                <input type="text" class="form-control text" placeholder="URL: http://my.awesome.link" name="url" id="activity_feedback_detail">
-            </div>
-            <div class="form-group text optional activity_feedback_detail">
-                    <div>
-
-                        <textarea class="form-control text optional" placeholder="A short description" name="description" id="activity_feedback_detail"></textarea>
-                    </div>
+            <input name="utf8" type="hidden" value="&#x2713;"/>
+            <div>
+                <div class="raty-editor" name="feedback[rating]">
+                    
                 </div>
-                    <div class="form-group text optional">
-                            <label class="control-label text optional">Topic: </label>
-                              <select name="topic">
-                                <option value="1">Javascript</option>
-                                <option value="2">HTML</option>
-                                <option value="3">CSS</option>
-                                <option value="4">Git</option>
-                                <option value="5">Terminal</option>
-                                <option value="6">Editors</option>
-                                <option value="7">Node/NPM</option>
-                                <option value="8">HTTP/REST</option>
-                                <option value="9">Express</option>
-                                <option value="10">EJS</option>
-                                <option value="11">MongoDB</option>
-                                <option value="12">SQL</option>
-                                <option value="13">Postgres</option>
-                                <option value="14">Knex</option>
-                                <option value="15">jQuery</option>
-                                <option value="16">Databases</option>
-                                <option value="17">Heroku</option>
-                                <option value="18">General</option>
-                              </select>
+                <div class="hint"></div>
+            </div>
+            <div class="form-group text optional activity_feedback_detail">
+                <label class="control-label text optional" for="activity_feedback_detail">Resource URL</label>
+                <div>
+                    
+                    <textarea class="form-control text optional" placeholder="Resource URL Goes Here" name="resource_url" id="activity_feedback_detail"></textarea>
+                </div>
+            </div>
+                <div class="form-group text optional activity_feedback_detail">
+                        <label class="control-label text optional" for="activity_feedback_detail">Description</label>
+                        <div>
+                            
+                            <textarea class="form-control text optional" placeholder="A Short Description" name="resource_description" id="activity_feedback_detail"></textarea>
                         </div>
+                    </div>
+                    <div class="form-group text optional activity_feedback_detail">
+                            <label class="control-label text optional" for="activity_feedback_detail">Topic</label>
+                            <div>
+                                    
+                                <textarea class="form-control text optional" placeholder="Javascript, HTML, JQuery, etc..." name="resource_topic" placeholder="A Short Description of The Resource Being Added" id="activity_feedback_detail"></textarea>
+                            </div>
+                        </div>        
                     <input type="submit" name="commit" value="Submit Resource" class="btn btn-tiny btn-primary" data-disable-with="Submit Feedback"/>
         </form>
+    </div>
+</div>
+</div> 
 </div>
 
 

@@ -16,7 +16,7 @@
 <div class="pinnednote activity">
 
   <a href="<%= results.resource.url %>"><div class="name"><%= results.resource.title %></div></a>
-  <span class="badge badge-warning resource-details"><a href="/topic/<%= results.topic.id %>"><%= results.topic.name %></a></span>
+  
   <span class="badge badge-warning user-details"><a href="/user/<%= results.user.id %>"><i class="fa fa-user"></i> <%= results.user.name %></a></span>
   
 
@@ -58,7 +58,7 @@
                 <input type="text" name="message" id="user_input">
               </form>  
                 
-  
+  <label>Your input: </label>
   <p><span id='display'></span></p>
 
 <% if (results.comments) { %>
