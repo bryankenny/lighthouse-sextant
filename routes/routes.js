@@ -351,7 +351,7 @@ module.exports = (knex, query) => {
 
     const user_id = req.session.userID;
     const resource_id = req.params.resourceID;
-    const comment = req.body.comment;
+    const comment = req.body.text;
     query.comment(user_id, resource_id, comment)
       .then(function (results) {
         res.redirect('/resource/' + resource_id);

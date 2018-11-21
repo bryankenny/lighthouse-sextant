@@ -99,7 +99,8 @@ module.exports = (knex) => {
       .join("users", "resources.user_id", "users.id")
       .where({ 'days.day': day })
       .select("resources.*")
-      .orderBy("topics.name")
+      .orderBy("resources.created_at")
+      .distinct()
       .then((results) => results);
 
   }
@@ -118,8 +119,10 @@ module.exports = (knex) => {
         .then((results) => out.resource = results[0] ),
 
       knex("comments")
+        .join("users", "comments.user_id", "users.id")
         .where({"comments.resource_id": resourceID})
-        .select("*")
+        .select("comments.*", "users.name as user_name")
+        .orderBy("comments.created_at", "desc")
         .then((results) => out.comments = results),
 
       knex("topics")

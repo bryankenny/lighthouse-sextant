@@ -15974,5 +15974,51 @@ body.admin-cohorts-show table.students tr a.tech-interview .badge-primary,body.a
 
 }
 
+.reaction-wrapper {
+  position: relative;
+}
+
+.btn-like {
+
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.btn-rating {
+
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+
+}
+
+.readout-likes {
+
+  position: absolute;
+  bottom: 2.5rem;
+  left: 0px;
+
+}
+
+.readout-rating {
+
+  position: absolute;
+  bottom: 2.5rem;
+  right: 0px;
+
+}
+
+
+.comment-text {
+  font-size: 0.9rem;
+
+}
+
+.comment-new {
+  resize: none;
+  width: 100%;
+  height: 6em;
+}
 
 

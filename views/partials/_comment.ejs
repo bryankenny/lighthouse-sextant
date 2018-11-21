@@ -1,0 +1,9 @@
+<div class="activity">
+
+  <div class="time time-duration">
+      <%= moment(comment.created_at).fromNow() %>
+  </div>
+
+  <div class="card-body"><div class="card-text comment-text"><%= comment.text %></div></div>
+  <span class="badge badge-warning resource-details"><a href="/user/<%= comment.user_id %>"><i class="fa fa-user"></i> <%= comment.user_name %></a></span>
+</div>
